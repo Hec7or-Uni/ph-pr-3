@@ -13,8 +13,10 @@
 ".\objects\g_boton.o"
 ".\objects\semaforo_interrupciones.o"
 ".\objects\power.o"
+".\objects\llamadas_sistema.o"
 ".\objects\conecta4_buscar_alineamiento_arm.o"
 ".\objects\conecta4_hay_linea_arm_arm.o"
 ".\objects\conecta4_hay_linea_arm_c.o"
+".\objects\swi.o"
 --strict --scatter ".\Objects\conecta4_2022.sct"
 --entry 0x0 --summary_stderr --info summarysizes -o .\Objects\conecta4_2022.axf

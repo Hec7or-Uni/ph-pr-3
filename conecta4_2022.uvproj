@@ -496,6 +496,11 @@
               <FileType>1</FileType>
               <FilePath>.\power.c</FilePath>
             </File>
+            <File>
+              <FileName>llamadas_sistema.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\llamadas_sistema.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -581,6 +586,11 @@
               <FileType>5</FileType>
               <FilePath>.\eventos.h</FilePath>
             </File>
+            <File>
+              <FileName>llamadas_sistema.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\llamadas_sistema.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -600,6 +610,11 @@
               <FileName>conecta4_hay_linea_arm_c.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\conecta4_hay_linea_arm_c.s</FilePath>
+            </File>
+            <File>
+              <FileName>SWI.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\SWI.s</FilePath>
             </File>
           </Files>
         </Group>

@@ -5,6 +5,7 @@
 #include "g_boton.h"
 #include "g_energia.h"
 #include "g_io.h"
+#include "llamadas_sistema.h"
 
 /**
  * @brief Función que prueba la respuesta del sistema ante el overflow
@@ -36,6 +37,10 @@ void init(void) {
 }
 
 int main(void) {
+  volatile uint32_t time = clock_gettime();
+  volatile uint32_t I = read_IRQ_bit();
+  volatile uint32_t F = read_FIQ_bit();
+
   int hay_evento, hay_msg;
   init();
   test_overflow(0);

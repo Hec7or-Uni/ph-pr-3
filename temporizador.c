@@ -37,11 +37,6 @@ void temporizador_reloj(int periodo) {
 
   T0MCR = 3;  // Interrumpe cada MR0 y resetea el contador
 
-  VICVectAddr0 = (unsigned long)timer0_IRC;
-  VICVectCntl0 =
-      (VICVectCntl0 & ~0x1f) | 0x24;  // borra los 5 bits de menos peso y
-                                      // escribe el indice del dispositivo.
-                                      // los bits 31:6 estan reservados
   VICIntSelect = VICIntSelect | 0x00000010;  // FIQ
   VICIntEnable = VICIntEnable | 0x00000010;  // Enable Timer0 Interrupt.
 

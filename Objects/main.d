@@ -17,3 +17,4 @@
 .\objects\main.o: power.h
 .\objects\main.o: g_io.h
 .\objects\main.o: gpio.h
+.\objects\main.o: llamadas_sistema.h
