@@ -26,7 +26,6 @@
 ; *  from on-chip RAM starting at address 0x40000000. 
 ; */
 
-
 ; Standard definitions of Mode bits and Interrupt (I & F) flags in PSRs
 
 Mode_USR        EQU     0x10
@@ -53,7 +52,7 @@ F_Bit           EQU     0x40            ; when F bit is set, FIQ is disabled
 UND_Stack_Size  EQU     0x00000000
 SVC_Stack_Size  EQU     0x00000400
 ABT_Stack_Size  EQU     0x00000000
-FIQ_Stack_Size  EQU     0x00000000
+FIQ_Stack_Size  EQU     0x00000080
 IRQ_Stack_Size  EQU     0x00000080
 USR_Stack_Size  EQU     0x00000400
 
@@ -61,6 +60,7 @@ Stack_Size      EQU     (UND_Stack_Size + SVC_Stack_Size + ABT_Stack_Size + \
                          FIQ_Stack_Size + IRQ_Stack_Size + USR_Stack_Size)
 
                 AREA    STACK, NOINIT, READWRITE, ALIGN=3
+						PRESERVE8 {TRUE}
 Stack_Mem       SPACE   Stack_Size
 
 Stack_Top       EQU     Stack_Mem + Stack_Size
@@ -169,12 +169,14 @@ DAbt_Addr       DCD     DAbt_Handler
 IRQ_Addr        DCD     IRQ_Handler
 FIQ_Addr        DCD     FIQ_Handler
 
+  EXTERN  timer0_IRC
+
 Undef_Handler   B       Undef_Handler
 SWI_Handler     B       SWI_Handler
 PAbt_Handler    B       PAbt_Handler
 DAbt_Handler    B       DAbt_Handler
 IRQ_Handler     B       IRQ_Handler
-FIQ_Handler     B       FIQ_Handler
+FIQ_Handler     B       timer0_IRC
 
 
 ; Reset Handler
