@@ -8,6 +8,10 @@
 ;/* development tools. Nothing else gives you the right to use this software. */
 ;/*****************************************************************************/
 
+; Standard definitions of Interrupt (I & F) flags and thumb bit in PSRs
+
+I_Bit           EQU     0x80            ; when I bit is set, IRQ is disabled
+F_Bit           EQU     0x40            ; when F bit is set, FIQ is disabled
 T_Bit           EQU     0x20
 
                 PRESERVE8                      ; 8-Byte aligned Stack
@@ -27,8 +31,14 @@ SWI_Handler
                 BICEQ   R12, R12, #0xFF000000  ; Extract SWI Number
 
 ; add code to enable/disable the global IRQ flag
-                CMP     R12,#0xFF              
-                BEQ     __decrease_var
+                CMP     R12, #0xFF              
+                BEQ     __enable_irq
+                CMP     R12, #0xFE
+                BEQ     __disable_irq
+                CMP     R12, #0xFD
+                BEQ     __enable_irq_fiq
+                CMP     R12, #0xFC
+                BEQ     __disable_irq_fiq
 
                 LDR     R8, SWI_Count
                 CMP     R12, R8
@@ -60,29 +70,14 @@ SWI_Table
 
 SWI_End
 
-                ; EXTERN shared_var [DATA,SIZE=4]
-
-__decrease_var
-;               LDR R8, =shared_var
-;               LDR R12, [r8]
-                SUB R12, R12, #1
-;               STR R12, [R8]
-                LDMFD   SP!, {R8, R12}         ; Load R8, SPSR
-                MSR     SPSR_cxsf, R12         ; Set SPSR
-                LDMFD   SP!, {R12, PC}^        ; Restore R12 and Return
-
-
-
-
 ;/**
 ; * @brief Lee el bit IRQ del registro de estado para saber si las interrupciones
 ; *        están habilitadas o deshabilitadas
 ; */
 read_IRQ_bit
-  MRS     R12, SPSR              ; Get SPSR
-  AND     R0, R12, #0x80
-  MOV     R0, R0, LSR #7
   LDMFD   SP!, {R8, R12}         ; Load R8, SPSR
+  AND     R0, R12, #I_Bit
+  MOV     R0, R0, LSR #7
   MSR     SPSR_cxsf, R12         ; Set SPSR
   LDMFD   SP!, {R12, PC}^        ; Restore R12 and Return
 
@@ -91,9 +86,9 @@ read_IRQ_bit
 ; *        están habilitadas o deshabilitadas
 ; */
 read_FIQ_bit
-  AND     R0, R12, #0x40
-  MOV     R0, R0, LSR #6
   LDMFD   SP!, {R8, R12}         ; Load R8, SPSR
+  AND     R0, R12, #F_Bit
+  MOV     R0, R0, LSR #6
   MSR     SPSR_cxsf, R12         ; Set SPSR
   LDMFD   SP!, {R12, PC}^        ; Restore R12 and Return
 
@@ -102,6 +97,7 @@ read_FIQ_bit
 ; */            
 __enable_irq
   LDMFD   SP!, {R8, R12}         ; Load R8, SPSR
+  BIC     R12, R12, #I_Bit       ; i bit = 0
   MSR     SPSR_cxsf, R12         ; Set SPSR
   LDMFD   SP!, {R12, PC}^        ; Restore R12 and Return
 
@@ -110,6 +106,7 @@ __enable_irq
 ; */
 __disable_irq
   LDMFD   SP!, {R8, R12}         ; Load R8, SPSR
+  ORR     R12, R12, #I_Bit       ; i bit = 1
   MSR     SPSR_cxsf, R12         ; Set SPSR
   LDMFD   SP!, {R12, PC}^        ; Restore R12 and Return
 
@@ -117,16 +114,18 @@ __disable_irq
 ; * @brief Activa interrupciones y fiq en el registro de estado.
 ; */
 __enable_irq_fiq
-  LDMFD   SP!, {R8, R12}         ; Load R8, SPSR
-  MSR     SPSR_cxsf, R12         ; Set SPSR
-  LDMFD   SP!, {R12, PC}^        ; Restore R12 and Return
+  LDMFD   SP!, {R8, R12}            ; Load R8, SPSR
+  BIC     R12, R12, #I_Bit:OR:F_Bit ; i bit = 0; f bit = 0
+  MSR     SPSR_cxsf, R12            ; Set SPSR
+  LDMFD   SP!, {R12, PC}^           ; Restore R12 and Return
 
 ;/**
 ; * @brief Desactiva interrupciones y fiq en el registro de estado.
 ; */
 __disable_irq_fiq
-  LDMFD   SP!, {R8, R12}         ; Load R8, SPSR
-  MSR     SPSR_cxsf, R12         ; Set SPSR
-  LDMFD   SP!, {R12, PC}^        ; Restore R12 and Return
+  LDMFD   SP!, {R8, R12}            ; Load R8, SPSR
+  ORR     R12, R12, #I_Bit:OR:F_Bit ; i bit = 0; f bit = 0
+  MSR     SPSR_cxsf, R12            ; Set SPSR
+  LDMFD   SP!, {R12, PC}^           ; Restore R12 and Return
 
                 END

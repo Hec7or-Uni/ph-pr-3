@@ -36,10 +36,19 @@ void init(void) {
   conecta4_iniciar();
 }
 
+// static volatile uint32_t time;
+// static volatile uint32_t I;
+// static volatile uint32_t F;
+
 int main(void) {
-  volatile uint32_t time = clock_gettime();
-  volatile uint32_t I = read_IRQ_bit();
-  volatile uint32_t F = read_FIQ_bit();
+  // disable_irq();
+	// enable_irq();
+	// disable_irq_fiq();
+	// enable_irq_fiq();
+
+	// time = clock_gettime();
+	// I = read_IRQ_bit();
+	// F = read_FIQ_bit();
 
   int hay_evento, hay_msg;
   init();
