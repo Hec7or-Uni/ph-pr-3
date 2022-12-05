@@ -4,6 +4,8 @@
 #include <LPC210x.H>
 #include <inttypes.h>
 
+#include "llamadas_sistema.h"
+
 static uint32_t recover;
 
 /**
