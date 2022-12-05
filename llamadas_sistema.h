@@ -8,7 +8,7 @@
 #include "utils.h"
 
 /**
- * @brief Lee el tiempo transcurrido en segundos usando el real-time clock
+ * @brief Devuelve el registro del real-time clock
  */
 uint32_t __swi(0) clock_gettime(void);
 
