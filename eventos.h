@@ -1,6 +1,12 @@
 #ifndef EVENTOS_H
 #define EVENTOS_H
 
-enum Eventos { TEMPORIZADOR, PULSACION, OVERFLOW_E };
+enum Eventos {
+  TEMPORIZADOR,
+  PULSACION,
+  CARACTER_RECIBIDO,
+  CARACTER_ENVIADO,
+  OVERFLOW_E
+};
 
 #endif
