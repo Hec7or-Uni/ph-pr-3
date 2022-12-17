@@ -10,4 +10,6 @@
 .\objects\conecta4_2022.o: C:\Keil_v5\ARM\INC\Philips\LPC210x.H
 .\objects\conecta4_2022.o: cola_asyn.h
 .\objects\conecta4_2022.o: semaforo_interrupciones.h
+.\objects\conecta4_2022.o: llamadas_sistema.h
+.\objects\conecta4_2022.o: temporizador.h
 .\objects\conecta4_2022.o: utils.h

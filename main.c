@@ -5,7 +5,11 @@
 #include "g_boton.h"
 #include "g_energia.h"
 #include "g_io.h"
+#include "g_serie.h"
 #include "llamadas_sistema.h"
+#include "contadores.h"
+
+volatile char letra;
 
 /**
  * @brief Función que prueba la respuesta del sistema ante el overflow
@@ -33,6 +37,7 @@ void init(void) {
   g_boton_iniciar();
   g_alarma_iniciar();
   g_energia_iniciar();
+  g_serie_iniciar();
   conecta4_iniciar();
 }
 
@@ -50,6 +55,20 @@ int main(void) {
 	// I = read_IRQ_bit();
 	// F = read_FIQ_bit();
 
+  RTC_init();
+  WD_init(8);
+  WD_feed();
+  volatile uint32_t min = 0, seg = 0;
+  while (1) {
+		uint32_t m, s;
+    RTC_leer(&m, &s);
+		min = m;
+		//seg = s;
+    if ((s & 1) != 0) {
+      seg = s;
+    }
+  }
+
   int hay_evento, hay_msg;
   init();
   test_overflow(0);
@@ -59,6 +78,7 @@ int main(void) {
       evento_t evento = cola_desencolar_eventos();
       g_alarma_tratar_evento(evento);
       g_io_tratar_evento(evento);
+      g_serie_tratar_evento(evento);
       g_boton_tratar_evento(evento);
     }
     hay_msg = cola_hay_msg();
@@ -67,9 +87,16 @@ int main(void) {
       g_alarma_tratar_mensaje(msg);
       g_energia_tratar_mensaje(msg);
       g_io_tratar_mensaje(msg);
+      g_serie_tratar_mensaje(msg);
       g_boton_tratar_mensaje(msg);
       conecta4_tratar_mensaje(msg);
     }
     if (!hay_evento && !hay_msg) g_energia_idle();
+
+    /*uint32_t m, s;
+    RTC_leer(&m, &s);
+    if (s < 1) {
+      WD_feed();
+    }*/
   }
 }

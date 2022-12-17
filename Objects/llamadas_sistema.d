@@ -8,4 +8,5 @@
 .\objects\llamadas_sistema.o: eventos.h
 .\objects\llamadas_sistema.o: msg.h
 .\objects\llamadas_sistema.o: semaforo_interrupciones.h
+.\objects\llamadas_sistema.o: llamadas_sistema.h
 .\objects\llamadas_sistema.o: utils.h

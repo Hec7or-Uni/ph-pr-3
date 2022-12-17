@@ -6,4 +6,7 @@
 .\objects\cola_asyn.o: msg.h
 .\objects\cola_asyn.o: semaforo_interrupciones.h
 .\objects\cola_asyn.o: C:\Keil_v5\ARM\INC\Philips\LPC210x.H
+.\objects\cola_asyn.o: llamadas_sistema.h
+.\objects\cola_asyn.o: temporizador.h
+.\objects\cola_asyn.o: cola_asyn.h
 .\objects\cola_asyn.o: utils.h

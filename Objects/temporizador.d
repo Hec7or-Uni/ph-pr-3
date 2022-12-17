@@ -7,4 +7,6 @@
 .\objects\temporizador.o: eventos.h
 .\objects\temporizador.o: msg.h
 .\objects\temporizador.o: semaforo_interrupciones.h
+.\objects\temporizador.o: llamadas_sistema.h
+.\objects\temporizador.o: temporizador.h
 .\objects\temporizador.o: utils.h

@@ -4,6 +4,8 @@
 #include <LPC210x.H> /* LPC210x definitions */
 #include <inttypes.h>
 
+#include "llamadas_sistema.h"
+
 // ----- REAL TIME CLOCK -----
 
 /**
@@ -33,6 +35,6 @@ void WD_init(int sec);
 /**
  * @brief Alimenta al watchdog timer
  */
-void WD_feed();
+void WD_feed(void);
 
 #endif

@@ -7,7 +7,9 @@
 .\objects\botones.o: eventos.h
 .\objects\botones.o: msg.h
 .\objects\botones.o: semaforo_interrupciones.h
+.\objects\botones.o: llamadas_sistema.h
+.\objects\botones.o: temporizador.h
+.\objects\botones.o: cola_asyn.h
 .\objects\botones.o: utils.h
 .\objects\botones.o: g_alarmas.h
 .\objects\botones.o: cola_msg.h
-.\objects\botones.o: temporizador.h

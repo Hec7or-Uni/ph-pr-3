@@ -7,8 +7,10 @@
 .\objects\g_energia.o: msg.h
 .\objects\g_energia.o: semaforo_interrupciones.h
 .\objects\g_energia.o: C:\Keil_v5\ARM\INC\Philips\LPC210x.H
+.\objects\g_energia.o: llamadas_sistema.h
+.\objects\g_energia.o: temporizador.h
+.\objects\g_energia.o: cola_asyn.h
 .\objects\g_energia.o: utils.h
 .\objects\g_energia.o: cola_msg.h
-.\objects\g_energia.o: temporizador.h
 .\objects\g_energia.o: g_alarmas.h
 .\objects\g_energia.o: power.h

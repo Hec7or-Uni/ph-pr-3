@@ -9,4 +9,6 @@
 .\objects\g_alarmas.o: C:\Keil_v5\ARM\INC\Philips\LPC210x.H
 .\objects\g_alarmas.o: cola_asyn.h
 .\objects\g_alarmas.o: semaforo_interrupciones.h
+.\objects\g_alarmas.o: llamadas_sistema.h
+.\objects\g_alarmas.o: temporizador.h
 .\objects\g_alarmas.o: utils.h

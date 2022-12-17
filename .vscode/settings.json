@@ -1,5 +1,6 @@
 {
   "files.associations": {
-    "contadores.C": "cpp"
+    "contadores.C": "cpp",
+    "llamadas_sistema.h": "c"
   }
 }

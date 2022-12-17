@@ -1,0 +1,13 @@
+.\objects\uart0.o: UART0.c
+.\objects\uart0.o: UART0.h
+.\objects\uart0.o: C:\Keil_v5\ARM\INC\Philips\LPC210X.H
+.\objects\uart0.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\inttypes.h
+.\objects\uart0.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\uart0.o: cola_asyn.h
+.\objects\uart0.o: eventos.h
+.\objects\uart0.o: msg.h
+.\objects\uart0.o: semaforo_interrupciones.h
+.\objects\uart0.o: llamadas_sistema.h
+.\objects\uart0.o: temporizador.h
+.\objects\uart0.o: cola_asyn.h
+.\objects\uart0.o: utils.h

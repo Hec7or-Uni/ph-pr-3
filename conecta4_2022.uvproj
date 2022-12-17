@@ -351,7 +351,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>0</interw>
-            <Optim>4</Optim>
+            <Optim>1</Optim>
             <oTime>1</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>0</OneElfS>
@@ -501,6 +501,21 @@
               <FileType>1</FileType>
               <FilePath>.\llamadas_sistema.c</FilePath>
             </File>
+            <File>
+              <FileName>contadores.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\contadores.c</FilePath>
+            </File>
+            <File>
+              <FileName>g_serie.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\g_serie.c</FilePath>
+            </File>
+            <File>
+              <FileName>UART0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\UART0.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -590,6 +605,21 @@
               <FileName>llamadas_sistema.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\llamadas_sistema.h</FilePath>
+            </File>
+            <File>
+              <FileName>contadores.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\contadores.h</FilePath>
+            </File>
+            <File>
+              <FileName>g_serie.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\g_serie.h</FilePath>
+            </File>
+            <File>
+              <FileName>UART0.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\UART0.h</FilePath>
             </File>
           </Files>
         </Group>
