@@ -184,7 +184,7 @@ I (eventos.h)(0x6398CAB8)
 I (msg.h)(0x639EED1B)
 I (semaforo_interrupciones.h)(0x638E2860)
 I (utils.h)(0x638E0AA3)
-F (.\g_serie.c)(0x639F8C1F)(--c99 -c --cpu ARM7TDMI -D__EVAL -g -O0 -Otime-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Philips-D__UVISION_VERSION="526"-o .\objects\g_serie.o --omf_browse .\objects\g_serie.crf --depend .\objects\g_serie.d)
+F (.\g_serie.c)(0x639F8E58)(--c99 -c --cpu ARM7TDMI -D__EVAL -g -O0 -Otime-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Philips-D__UVISION_VERSION="526"-o .\objects\g_serie.o --omf_browse .\objects\g_serie.crf --depend .\objects\g_serie.d)
 I (g_serie.h)(0x639F8AD6)
 I (C:\Keil_v5\ARM\INC\Philips\LPC210X.H)(0x638646D0)
 I (C:\Keil_v5\ARM\ARMCC\include\inttypes.h)(0x599F2F9E)

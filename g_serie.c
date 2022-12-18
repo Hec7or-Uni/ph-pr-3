@@ -11,7 +11,8 @@ enum Cadenas {
   CADENA_BASE,
 
   CADENA_INICIAL,
-  CADENA_RESET
+  CADENA_RESET,
+  CADENA_CARACTER
 };
 
 enum { COLA_CADENAS_SIZE = 16 };
@@ -53,6 +54,11 @@ void g_serie_desencolar_cadena(void) {
 void g_serie_mostrar_cadena(uint8_t cadena) {
   if (cadena > 0 && cadena <= NUM_FILAS) {  // Caso de una fila
     cola_encolar_msg(PEDIR_FILA, cadena);
+    return;
+  }
+  if (cadena > 'a') {
+    char dasdas[2] = {cadena, '\0'};
+		uart0_enviar_array(dasdas);
     return;
   }
 
@@ -131,6 +137,8 @@ void clean_buffer(char buffer[BUFFER_SIZE]) {
 void g_serie_caracter_recibido(char c) {
   static char buffer[BUFFER_SIZE];
   static uint8_t i = 0, leer = FALSE;
+
+  g_serie_encolar_cadena(c);
 
   if (c == '#') {  // Comienzo de comando
     leer = TRUE;
