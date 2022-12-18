@@ -236,6 +236,15 @@ void C4_jugar() {
   }
 }
 
+void C4_devolver_fila(uint32_t fila) {
+  uint32_t result = fila;
+  for (int col = 1; col <= NUM_COLUMNAS; col++) {
+    int desplazamiento = ((col - 1) << 2) + 4;  //(col - 1) * 4 + 4
+    result = result | (tablero[fila][col] << desplazamiento);
+  }
+  cola_encolar_msg(DEVOLVER_FILA, result);
+}
+
 void conecta4_tratar_mensaje(msg_t mensaje) {
   static volatile uint32_t tiempo_inicial, tiempo_final, tiempo_total;
   switch (mensaje.ID_msg) {
@@ -252,6 +261,9 @@ void conecta4_tratar_mensaje(msg_t mensaje) {
     case COMPROBACION_REALIZADA:
       tiempo_final = mensaje.timestamp;
       tiempo_total = tiempo_final - tiempo_inicial;
+      break;
+    case PEDIR_FILA:
+      C4_devolver_fila(mensaje.auxData);
       break;
   }
 }

@@ -1,6 +1,10 @@
 {
   "files.associations": {
     "contadores.C": "cpp",
-    "llamadas_sistema.h": "c"
+    "llamadas_sistema.h": "c",
+    "g_serie.h": "c",
+    "uart0.h": "c",
+    "inttypes.h": "c",
+    "cola_asyn.h": "c"
   }
 }

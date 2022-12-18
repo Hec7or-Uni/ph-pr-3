@@ -12,4 +12,6 @@
 .\objects\g_serie.o: temporizador.h
 .\objects\g_serie.o: cola_asyn.h
 .\objects\g_serie.o: utils.h
+.\objects\g_serie.o: celda.h
 .\objects\g_serie.o: cola_msg.h
+.\objects\g_serie.o: conecta4_2022.h

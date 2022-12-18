@@ -1,13 +1,13 @@
 #include "cola_asyn.h"
 #include "cola_msg.h"
 #include "conecta4_2022.h"
+#include "contadores.h"
 #include "g_alarmas.h"
 #include "g_boton.h"
 #include "g_energia.h"
 #include "g_io.h"
 #include "g_serie.h"
 #include "llamadas_sistema.h"
-#include "contadores.h"
 
 volatile char letra;
 
@@ -39,6 +39,10 @@ void init(void) {
   g_energia_iniciar();
   g_serie_iniciar();
   conecta4_iniciar();
+
+  RTC_init();
+  WD_init(1);
+  WD_feed();
 }
 
 // static volatile uint32_t time;
@@ -47,27 +51,24 @@ void init(void) {
 
 int main(void) {
   // disable_irq();
-	// enable_irq();
-	// disable_irq_fiq();
-	// enable_irq_fiq();
+  // enable_irq();
+  // disable_irq_fiq();
+  // enable_irq_fiq();
 
-	// time = clock_gettime();
-	// I = read_IRQ_bit();
-	// F = read_FIQ_bit();
+  // time = clock_gettime();
+  // I = read_IRQ_bit();
+  // F = read_FIQ_bit();
 
-  RTC_init();
-  WD_init(8);
-  WD_feed();
-  volatile uint32_t min = 0, seg = 0;
-  while (1) {
-		uint32_t m, s;
-    RTC_leer(&m, &s);
-		min = m;
-		//seg = s;
-    if ((s & 1) != 0) {
-      seg = s;
-    }
-  }
+  // volatile uint32_t min = 0, seg = 0;
+  // while (1) {
+  // 	uint32_t m, s;
+  //   RTC_leer(&m, &s);
+  // 	min = m;
+  // 	//seg = s;
+  //   if ((s & 1) != 0) {
+  //     seg = s;
+  //   }
+  // }
 
   int hay_evento, hay_msg;
   init();
@@ -93,10 +94,6 @@ int main(void) {
     }
     if (!hay_evento && !hay_msg) g_energia_idle();
 
-    /*uint32_t m, s;
-    RTC_leer(&m, &s);
-    if (s < 1) {
-      WD_feed();
-    }*/
+    WD_feed();
   }
 }

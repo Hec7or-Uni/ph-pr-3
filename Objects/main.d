@@ -13,6 +13,7 @@
 .\objects\main.o: cola_msg.h
 .\objects\main.o: conecta4_2022.h
 .\objects\main.o: celda.h
+.\objects\main.o: contadores.h
 .\objects\main.o: g_alarmas.h
 .\objects\main.o: g_boton.h
 .\objects\main.o: g_energia.h
@@ -21,4 +22,3 @@
 .\objects\main.o: gpio.h
 .\objects\main.o: g_serie.h
 .\objects\main.o: UART0.h
-.\objects\main.o: contadores.h

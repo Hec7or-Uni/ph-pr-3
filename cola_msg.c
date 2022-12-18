@@ -10,7 +10,7 @@ void cola_encolar_msg(uint8_t ID_msg, uint32_t auxData) {
     colaID[last] = OVERFLOW_M;
   } else {
     colaDATA[last] = auxData;
-    colaTIME[last] = temporizador_leer();
+    colaTIME[last] = clock_get_us();
     colaID[last] = ID_msg;
     last++;
     if (last == COLA_MSG_SIZE) {

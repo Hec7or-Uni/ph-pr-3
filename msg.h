@@ -20,6 +20,9 @@ enum Mensajes {
   EJECUTAR,  // auxData := mensaje a encolar
   ENTRADA_ACTUALIZADA,
 
+  PEDIR_FILA,
+  DEVOLVER_FILA,
+
   RESET,
   FIN,
   OVERFLOW_M
