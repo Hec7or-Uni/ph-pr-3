@@ -93,9 +93,9 @@ void g_io_tratar_mensaje(msg_t mensaje) {
     case APAGAR_REALIZADA:
       g_io_apagar_realizada();
       break;
-    case JUGADOR:
+    /*case JUGADOR:
       g_io_mostrar_jugador(mensaje.auxData);
-      break;
+      break;*/
     case FIN:
       g_io_fin();
       break;

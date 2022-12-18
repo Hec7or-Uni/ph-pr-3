@@ -39,14 +39,14 @@ void g_serie_caracter_recibido(char c) {
   static char buffer[BUFFER_SIZE];
   static uint8_t i = 0, leer = FALSE;
 
-  if (c == '#') {  // Comienzo de mensaje
+  if (c == '#') {  // Comienzo de comando
     leer = TRUE;
     i = 0;
     clean_buffer(buffer);
-  } else if (leer && c == '!') {  // Fin de mensaje
+  } else if (leer && c == '!') {  // Fin de comando
     leer = FALSE;
     g_serie_ejecutar_cmd(buffer);
-  } else if (leer) {  // Caracter del mensaje
+  } else if (leer) {  // Caracter del comando
     if (i >= 3)
       leer = FALSE;
     else
@@ -167,7 +167,8 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
 
 void g_serie_iniciar(void) {
   uart0_iniciar();
-  g_serie_pedir_filas();  // Para imprimir el tablero
+  uart0_enviar_array("HOLA\n");
+  //g_serie_pedir_filas();  // Para imprimir el tablero
 }
 
 // G_SERIE (PEDIR_FILAS, 1) -> C4

@@ -41,8 +41,8 @@ void init(void) {
   conecta4_iniciar();
 
   RTC_init();
-  WD_init(1);
-  WD_feed();
+  //WD_init(1);
+  //WD_feed();
 }
 
 // static volatile uint32_t time;
@@ -94,6 +94,6 @@ int main(void) {
     }
     if (!hay_evento && !hay_msg) g_energia_idle();
 
-    WD_feed();
+    //WD_feed();
   }
 }

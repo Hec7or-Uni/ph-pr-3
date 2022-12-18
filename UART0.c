@@ -34,10 +34,9 @@ void uart0_iniciar() {
   U0FCR = (U0FCR | 0x1) & ~0xC0;  // U0FCR =  '11xx xxx1'
   U0IER = U0IER | 0x3;            // Habilita interrupciones RBR y THRE
 
-  VICVectAddr3 = (unsigned long)uart0_IRC;  // set interrupt vector in 4
+  VICVectAddr3 = (unsigned long)uart0_IRC;
 
-  // 0x20 bit 5 enables vectored IRQs.
-  // 6 is the number of the interrupt assigned. Number 6 is the UART0
+  // Habilita la interrupción 6 (UART0)
   VICVectCntl3 = VICVectCntl3 | 0x26;
   VICIntEnable = VICIntEnable | 0x40;  // Enable UART0 Interrupt (bit 6)
 }
