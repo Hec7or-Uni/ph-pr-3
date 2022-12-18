@@ -1,6 +1,7 @@
 #include "UART0.h"
 
-static char* caracter_a_enviar;
+static uint8_t indice_envio = 0, longitud;
+static char buffer_envio[BUFFER_ENVIO_SIZE];
 
 void uart0_IRC(void) __irq {
   static int vecesRecibido = 0;
@@ -41,16 +42,25 @@ void uart0_iniciar() {
   VICIntEnable = VICIntEnable | 0x40;  // Enable UART0 Interrupt (bit 6)
 }
 
-void uart0_enviar_array(char* array) {
-  caracter_a_enviar = array;
-  U0THR = *caracter_a_enviar;
-  caracter_a_enviar++;
+void uart0_enviar_array(const char* array) {
+  if (*array == '\0') return;  // Un array vacío no se envía
+
+  int fin = FALSE;
+  for (longitud = 0; longitud < BUFFER_ENVIO_SIZE && !fin; longitud++) {
+    buffer_envio[longitud] = array[longitud];
+
+    // No almacenar el caracter final permite enviar uno extra
+    fin = (array[longitud + 1] == '\0');
+  }
+  indice_envio = 0;
+  U0THR = buffer_envio[indice_envio];
+  indice_envio++;
 }
 
 int uart0_continuar_envio(void) {
-  if (*caracter_a_enviar != '\0') {
-    U0THR = *caracter_a_enviar;
-    caracter_a_enviar++;
+  if (indice_envio < longitud) {
+    U0THR = buffer_envio[indice_envio];
+    indice_envio++;
     return TRUE;
   }
   return FALSE;

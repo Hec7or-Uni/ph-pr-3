@@ -30,11 +30,10 @@ SWI_Handler
                 LDREQ   R12, [LR,#-4]          ; ARM:   Load Word
                 BICEQ   R12, R12, #0xFF000000  ; Extract SWI Number
 
-; add code to enable/disable the global IRQ flag
                 CMP     R12, #0xFF              
-                BEQ     __enable_irq
+                BEQ     __enable_fiq
                 CMP     R12, #0xFE
-                BEQ     __disable_irq
+                BEQ     __disable_fiq
                 CMP     R12, #0xFD
                 BEQ     __enable_irq_fiq
                 CMP     R12, #0xFC
@@ -93,20 +92,20 @@ read_FIQ_bit
   LDMFD   SP!, {R12, PC}^        ; Restore R12 and Return
 
 ;/**
-; * @brief Activa sólo las interrupciones irq en el registro de estado.
+; * @brief Activa sólo las interrupciones fiq en el registro de estado.
 ; */            
-__enable_irq
+__enable_fiq
   LDMFD   SP!, {R8, R12}         ; Load R8, SPSR
-  BIC     R12, R12, #I_Bit       ; i bit = 0
+  BIC     R12, R12, #F_Bit       ; f bit = 0
   MSR     SPSR_cxsf, R12         ; Set SPSR
   LDMFD   SP!, {R12, PC}^        ; Restore R12 and Return
 
 ;/**
-; * @brief Desactiva sólo las interrupciones irq en el registro de estado.
+; * @brief Desactiva sólo las interrupciones fiq en el registro de estado.
 ; */
-__disable_irq
+__disable_fiq
   LDMFD   SP!, {R8, R12}         ; Load R8, SPSR
-  ORR     R12, R12, #I_Bit       ; i bit = 1
+  ORR     R12, R12, #F_Bit       ; f bit = 1
   MSR     SPSR_cxsf, R12         ; Set SPSR
   LDMFD   SP!, {R12, PC}^        ; Restore R12 and Return
 

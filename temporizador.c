@@ -2,7 +2,7 @@
 
 void timer0_IRC(void) __irq {
   static int veces = 0;
-  cola_encolar_eventos(TEMPORIZADOR, ++veces, 0);
+  cola_encolar_eventos_raw(TEMPORIZADOR, ++veces, 0);
   T0IR = 1;         // Clear interrupt flag
   VICVectAddr = 0;  // Acknowledge Interrupt
 }

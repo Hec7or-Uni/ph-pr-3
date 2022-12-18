@@ -32,12 +32,12 @@ uint8_t __swi(3) read_FIQ_bit(void);
 /**
  * @brief Activa sólo las interrupciones irq en el registro de estado.
  */
-void __swi(0xFF) enable_irq(void);
+void __swi(0xFF) enable_fiq(void);
 
 /**
  * @brief Desactiva sólo las interrupciones irq en el registro de estado.
  */
-void __swi(0xFE) disable_irq(void);
+void __swi(0xFE) disable_fiq(void);
 
 /**
  * @brief Activa interrupciones y fiq en el registro de estado.

@@ -16,7 +16,18 @@ typedef struct evento_t {
 } evento_t;
 
 /**
- * @brief  Función que encola un evento a la cola de eventos
+ * @brief  Función que encola un evento a la cola de eventos (sin bloquear
+ * interrupciones)
+ * @param ID_msg Identificador único del evento
+ * @param veces Número de veces que ha aparecido un evento
+ * @param auxData Información extra sobre el evento
+ */
+void cola_encolar_eventos_raw(uint8_t ID_evento, uint32_t veces,
+                              uint32_t auxData);
+
+/**
+ * @brief  Función que encola un evento a la cola de eventos (bloqueando
+ * interrupciones)
  * @param ID_msg Identificador único del evento
  * @param veces Número de veces que ha aparecido un evento
  * @param auxData Información extra sobre el evento

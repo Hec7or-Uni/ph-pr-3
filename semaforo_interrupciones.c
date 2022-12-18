@@ -9,12 +9,12 @@ void bloquear_interrupciones() {
 }
 
 void liberar_interrupciones() {
-  if (i_flag == 0 && f_flag == 0)
+  if (i_flag == 0 && f_flag == 0) {
     enable_irq_fiq();
-  else if (i_flag == 0 && f_flag == 1)
-    enable_irq();
-  else if (i_flag == 1 && f_flag == 0) {
+  } else if (i_flag == 0 && f_flag == 1) {
     enable_irq_fiq();
-    disable_irq();
+    disable_fiq();
+  } else if (i_flag == 1 && f_flag == 0) {
+    enable_fiq();
   }  // else {ya están desactivadas}
 }
