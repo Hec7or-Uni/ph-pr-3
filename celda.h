@@ -39,10 +39,10 @@ __inline static uint8_t celda_color(CELDA celda) { return (celda & 0x03); }
 /* *****************************************************************************
  * Devuelve 1 si la celda es blanca y valida
  */
-__inline static uint8_t celda_blanca(CELDA celda) { return celda & 0x05; }
+__inline static uint8_t celda_blanca(CELDA celda) { return celda == 0x05; }
 
 /* *****************************************************************************
  * Devuelve 1 si la celda es negra y valida
  */
-__inline static uint8_t celda_negra(CELDA celda) { return celda & 0x06; }
+__inline static uint8_t celda_negra(CELDA celda) { return celda == 0x06; }
 #endif  // CELDA_H

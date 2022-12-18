@@ -80,13 +80,13 @@ void g_serie_mostrar_cadena(uint8_t cadena) {
       array[17] = '\0';
       break;
     case CADENA_INICIAL:
-      for (char* p = "Hola"; *p; p++, i++) {
+      for (char* p = "Hola\n"; *p; p++, i++) {
         array[i] = *p;
       }
       array[i] = '\0';
       break;
     case CADENA_RESET:
-      for (char* p = "Reset"; *p; p++, i++) {
+      for (char* p = "Reset\n"; *p; p++, i++) {
         array[i] = *p;
       }
       array[i] = '\0';
