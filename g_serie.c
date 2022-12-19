@@ -130,7 +130,7 @@ void clean_buffer(char buffer[BUFFER_SIZE]) {
 }
 
 void g_serie_caracter_recibido(char c) {
-  static char buffer[BUFFER_SIZE + 1];
+  static char buffer[BUFFER_SIZE];
   static uint8_t i = 0, leer = FALSE;
 
   if (c == '#') {  // Comienzo de comando
