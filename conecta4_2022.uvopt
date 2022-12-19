@@ -142,7 +142,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGDARM</Key>
-          <Name>(134=-1,-1,-1,-1,0)(135=-1,-1,-1,-1,0)(107=-1,-1,-1,-1,0)(108=429,194,586,314,0)(106=994,204,1272,558,0)(105=849,53,1087,335,0)(80=882,128,1393,538,0)(104=234,30,550,449,0)(100=577,190,1160,372,1)(113=574,165,959,606,0)(112=220,154,718,864,0)(136=-1,-1,-1,-1,0)(117=-1,-1,-1,-1,0)(110=615,197,1141,652,0)(111=843,159,1369,614,0)(114=277,416,803,794,0)(115=537,149,1054,536,0)(116=1253,49,1479,299,0)</Name>
+          <Name>(134=-1,-1,-1,-1,0)(135=-1,-1,-1,-1,0)(107=-1,-1,-1,-1,0)(108=429,194,586,314,0)(106=994,204,1272,558,0)(105=849,53,1039,297,0)(80=882,128,1393,538,0)(104=234,30,550,449,0)(100=646,116,1229,298,1)(113=361,187,746,628,0)(112=220,154,718,864,0)(136=-1,-1,-1,-1,0)(117=195,234,475,631,0)(110=615,197,1141,652,0)(111=843,159,1369,614,0)(114=277,416,803,794,0)(115=537,149,1054,536,0)(116=1253,49,1479,299,0)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -159,6 +159,33 @@
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
+      <ToolboxButtons>
+        <Wi>
+          <IntNumber>0</IntNumber>
+          <FirstString>RESET</FirstString>
+          <SecondString>PORT = PORT &amp; ~0X8000; PORT = PORT | 0X8000;</SecondString>
+        </Wi>
+        <Wi>
+          <IntNumber>1</IntNumber>
+          <FirstString>CANCEL</FirstString>
+          <SecondString>PORT = PORT &amp; ~0X4000; PORT = PORT | 0X4000</SecondString>
+        </Wi>
+        <Wi>
+          <IntNumber>2</IntNumber>
+          <FirstString>NEW</FirstString>
+          <SecondString>S0IN = '#'; S0IN = 'N'; S0IN = 'E'; S0IN = 'W'; S0IN = '!'</SecondString>
+        </Wi>
+        <Wi>
+          <IntNumber>3</IntNumber>
+          <FirstString>END</FirstString>
+          <SecondString>S0IN = '#'; S0IN = 'E'; S0IN = 'N'; S0IN = 'D'; S0IN = '!'</SecondString>
+        </Wi>
+        <Wi>
+          <IntNumber>4</IntNumber>
+          <FirstString>C</FirstString>
+          <SecondString>S0IN = '#'; S0IN = 'C'; S0IN = '!'</SecondString>
+        </Wi>
+      </ToolboxButtons>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
@@ -168,12 +195,12 @@
         <aLwin>1</aLwin>
         <aCover>0</aCover>
         <aSer1>1</aSer1>
-        <aSer2>0</aSer2>
+        <aSer2>1</aSer2>
         <aPa>0</aPa>
         <viewmode>1</viewmode>
         <vrSel>0</vrSel>
         <aSym>0</aSym>
-        <aTbox>0</aTbox>
+        <aTbox>1</aTbox>
         <AscS1>0</AscS1>
         <AscS2>0</AscS2>
         <AscS3>0</AscS3>
@@ -182,7 +209,7 @@
         <aLa>0</aLa>
         <aPa1>0</aPa1>
         <AscS4>0</AscS4>
-        <aSer4>0</aSer4>
+        <aSer4>1</aSer4>
         <StkLoc>0</StkLoc>
         <TrcWin>0</TrcWin>
         <newCpu>0</newCpu>

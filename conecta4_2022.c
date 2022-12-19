@@ -251,6 +251,9 @@ void conecta4_tratar_mensaje(msg_t mensaje) {
     case RESET:
       conecta4_iniciar();
       break;
+    case FIN:
+      estado = C4_FIN;
+      break;
     case VALIDAR_ENTRADA:
       C4_validar(mensaje.auxData);
       break;

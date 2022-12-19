@@ -12,7 +12,7 @@ enum Cadenas {
 
   CADENA_INICIAL,
   CADENA_RESET,
-  CADENA_CARACTER
+  CADENA_FIN
 };
 
 enum { COLA_CADENAS_SIZE = 16 };
@@ -23,7 +23,7 @@ static uint8_t cola_cadenas[COLA_CADENAS_SIZE];
 void g_serie_encolar_cadena(uint8_t cadena) {
   if (full) return;
 
-  if (first == last) {  // Si está vacía lo muestras
+  if (first == last) {  // Si está vacía antes de encolar se muestra
     g_serie_mostrar_cadena(cadena);
   }
 
@@ -45,7 +45,7 @@ void g_serie_desencolar_cadena(void) {
   }
   full = FALSE;
 
-  if (first != last) {
+  if (first != last) { // Si está vacía una vez desencolado se muestra
     uint8_t cadena = cola_cadenas[first];
     g_serie_mostrar_cadena(cadena);
   }
@@ -56,13 +56,9 @@ void g_serie_mostrar_cadena(uint8_t cadena) {
     cola_encolar_msg(PEDIR_FILA, cadena);
     return;
   }
-  if (cadena > 'a') {
-    char dasdas[2] = {cadena, '\0'};
-		uart0_enviar_array(dasdas);
-    return;
-  }
 
   char array[BUFFER_ENVIO_SIZE];
+  char* p = array;
   int i = 0;
   switch (cadena) {
     case CADENA_GUIONES:
@@ -86,22 +82,19 @@ void g_serie_mostrar_cadena(uint8_t cadena) {
       array[17] = '\0';
       break;
     case CADENA_INICIAL:
-      for (char* p = "Hola\n"; *p; p++, i++) {
-        array[i] = *p;
-      }
-      array[i] = '\0';
+      p = "Hola\n";
       break;
     case CADENA_RESET:
-      for (char* p = "Reset\n"; *p; p++, i++) {
-        array[i] = *p;
-      }
-      array[i] = '\0';
+      p = "Reset\n";
+      break;
+    case CADENA_FIN:
+      p = "Fin\n";
       break;
     default:
       array[0] = '\0';
       break;
   }
-  uart0_enviar_array(array);
+  uart0_enviar_array(p);
 }
 
 const char* CMD_JUGAR = "C";
@@ -115,8 +108,10 @@ int g_serie_ejecutar_cmd(char buffer[BUFFER_SIZE]) {
   for (uint8_t i = 0; i < NUM_COMANDOS; i++) {
     int iguales = TRUE;
     for (uint8_t j = 0; j < BUFFER_SIZE && iguales; j++) {
-      if (cmd[i][j] == '\0' || buffer[j] != cmd[i][j]) {
+      if (buffer[j] != cmd[i][j]) {
         iguales = FALSE;
+      } else if (cmd[i][j] == '\0') {
+        break;
       }
     }
     if (iguales) {
@@ -135,10 +130,8 @@ void clean_buffer(char buffer[BUFFER_SIZE]) {
 }
 
 void g_serie_caracter_recibido(char c) {
-  static char buffer[BUFFER_SIZE];
+  static char buffer[BUFFER_SIZE + 1];
   static uint8_t i = 0, leer = FALSE;
-
-  g_serie_encolar_cadena(c);
 
   if (c == '#') {  // Comienzo de comando
     leer = TRUE;
@@ -221,6 +214,10 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
       break;
     case RESET:
       g_serie_encolar_cadena(CADENA_RESET);
+      break;
+    case FIN:
+      g_serie_encolar_cadena(CADENA_FIN);
+      break;
   }
 }
 
@@ -229,6 +226,3 @@ void g_serie_iniciar(void) {
   g_serie_encolar_cadena(CADENA_INICIAL);
   g_serie_encolar_tablero();
 }
-
-// G_SERIE (PEDIR_FILAS, 1) -> C4
-// C4 (DEVOLVER_FILAS, F1 1 2 3 4 5 6 7) -> G_SERIE
