@@ -3,8 +3,6 @@
 
 #include <inttypes.h>
 
-#include "UART0.h"
-
 enum Cadenas {
   CADENA_FILA1 = 0xF1,
   CADENA_FILA2 = 0xF2,
