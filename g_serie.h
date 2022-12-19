@@ -5,6 +5,7 @@
 #include <inttypes.h>
 
 #include "UART0.h"
+#include "cadenas.h"
 #include "celda.h"
 #include "cola_asyn.h"
 #include "cola_msg.h"
@@ -13,8 +14,7 @@
 #include "msg.h"
 #include "utils.h"
 
-#define BUFFER_SIZE 3
-#define NUM_COMANDOS 3
+enum { COLA_CADENAS_SIZE = 32, BUFFER_SIZE = 3, NUM_COMANDOS = 3 };
 
 void g_serie_encolar_cadena(uint8_t cadena);
 

@@ -1,22 +1,5 @@
 #include "g_serie.h"
 
-enum Cadenas {
-  CADENA_FILA1 = 1,
-  CADENA_FILA2 = 2,
-  CADENA_FILA3 = 3,
-  CADENA_FILA4 = 4,
-  CADENA_FILA5 = 5,
-  CADENA_FILA6 = 6,
-  CADENA_GUIONES,
-  CADENA_BASE,
-
-  CADENA_INICIAL,
-  CADENA_RESET,
-  CADENA_FIN
-};
-
-enum { COLA_CADENAS_SIZE = 16 };
-
 static uint8_t first = 0, last = 0, full = FALSE;
 static uint8_t cola_cadenas[COLA_CADENAS_SIZE];
 
@@ -45,56 +28,18 @@ void g_serie_desencolar_cadena(void) {
   }
   full = FALSE;
 
-  if (first != last) { // Si está vacía una vez desencolado se muestra
+  if (first != last) {  // Si está vacía una vez desencolado se muestra
     uint8_t cadena = cola_cadenas[first];
     g_serie_mostrar_cadena(cadena);
   }
 }
 
 void g_serie_mostrar_cadena(uint8_t cadena) {
-  if (cadena > 0 && cadena <= NUM_FILAS) {  // Caso de una fila
-    cola_encolar_msg(PEDIR_FILA, cadena);
-    return;
+  if (cadena >= CADENA_FILA1 && cadena <= CADENA_FILA6) {  // Caso de una fila
+    cola_encolar_msg(PEDIR_FILA, cadena - CADENA_FILA1 + 1);
+  } else {
+    uart0_enviar_array(cadenas[cadena]);
   }
-
-  char array[BUFFER_ENVIO_SIZE];
-  char* p = array;
-  int i = 0;
-  switch (cadena) {
-    case CADENA_GUIONES:
-      // imprime "----------------\n"
-      for (i = 0; i < 16; i++) {
-        array[i] = '-';
-      }
-      array[16] = '\n';
-      array[17] = '\0';
-      break;
-    case CADENA_BASE:
-      // imprime "-|1|2|3|4|5|6|7|\n"
-      array[0] = '-';
-      for (i = 1; i <= NUM_COLUMNAS; i++) {
-        int indice = ((i - 1) << 1);
-        array[indice + 1] = '|';
-        array[indice + 2] = '0' + i;
-      }
-      array[15] = '|';
-      array[16] = '\n';
-      array[17] = '\0';
-      break;
-    case CADENA_INICIAL:
-      p = "Hola\n";
-      break;
-    case CADENA_RESET:
-      p = "Reset\n";
-      break;
-    case CADENA_FIN:
-      p = "Fin\n";
-      break;
-    default:
-      array[0] = '\0';
-      break;
-  }
-  uart0_enviar_array(p);
 }
 
 const char* CMD_JUGAR = "C";
@@ -160,35 +105,34 @@ char g_serie_codificar_jugador(CELDA celda) {
 }
 
 void g_serie_mostrar_fila(uint32_t datosFila) {
-  char array_fila[18];
+  char array_fila[BUFFER_ENVIO_SIZE] = "      x| | | | | | | |\n";
 
   int fila = datosFila & 0xF;
-  array_fila[0] = '0' + fila;
+  array_fila[6] = '0' + fila;
 
   datosFila = datosFila >> 4;
 
-  for (int col = 1; col <= NUM_COLUMNAS; col++) {
-    int indice = ((col - 1) << 1);
-    char valor = g_serie_codificar_jugador(datosFila & 0xF);
-    array_fila[indice + 1] = '|';
-    array_fila[indice + 2] = valor;
+  for (int i = 8; i <= 20; i += 2) {
+    array_fila[i] = g_serie_codificar_jugador(datosFila & 0xF);
 
     datosFila = datosFila >> 4;
   }
-
-  array_fila[15] = '|';
-  array_fila[16] = '\n';
-  array_fila[17] = '\0';
 
   uart0_enviar_array(array_fila);
 }
 
 void g_serie_encolar_tablero() {
-  for (int i = NUM_FILAS; i >= 1; i--) {
-    g_serie_encolar_cadena(i);
+  for (uint8_t c = CADENA_FILA6; c >= CADENA_FILA1; c--) {
+    g_serie_encolar_cadena(c);
   }
-  g_serie_encolar_cadena(CADENA_GUIONES);
-  g_serie_encolar_cadena(CADENA_BASE);
+  g_serie_encolar_cadena(CADENA_BASE1);
+  g_serie_encolar_cadena(CADENA_BASE2);
+}
+
+void g_serie_encolar_inicio() {
+  for (uint8_t c = CADENA_CABECERA1; c <= CADENA_CABECERA20; c++) {
+    g_serie_encolar_cadena(c);
+  }
 }
 
 void g_serie_tratar_evento(evento_t evento) {
@@ -216,13 +160,13 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
       g_serie_encolar_cadena(CADENA_RESET);
       break;
     case FIN:
-      g_serie_encolar_cadena(CADENA_FIN);
+      // g_serie_encolar_cadena(CADENA_FIN);
       break;
   }
 }
 
 void g_serie_iniciar(void) {
   uart0_iniciar();
-  g_serie_encolar_cadena(CADENA_INICIAL);
+  g_serie_encolar_inicio();
   g_serie_encolar_tablero();
 }

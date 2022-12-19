@@ -142,7 +142,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGDARM</Key>
-          <Name>(134=-1,-1,-1,-1,0)(135=-1,-1,-1,-1,0)(107=-1,-1,-1,-1,0)(108=429,194,586,314,0)(106=994,204,1272,558,0)(105=849,53,1039,297,0)(80=882,128,1393,538,0)(104=234,30,550,449,0)(100=646,116,1229,298,1)(113=361,187,746,628,0)(112=220,154,718,864,0)(136=-1,-1,-1,-1,0)(117=195,234,475,631,0)(110=615,197,1141,652,0)(111=843,159,1369,614,0)(114=277,416,803,794,0)(115=537,149,1054,536,0)(116=1253,49,1479,299,0)</Name>
+          <Name>(134=-1,-1,-1,-1,0)(135=-1,-1,-1,-1,0)(107=-1,-1,-1,-1,0)(108=429,194,586,314,0)(106=994,204,1272,558,0)(105=849,53,1039,297,0)(80=882,128,1393,538,0)(104=234,30,550,449,0)(100=951,2,1534,184,1)(113=361,187,746,628,0)(112=220,154,718,864,0)(136=-1,-1,-1,-1,0)(117=195,234,475,631,0)(110=615,197,1141,652,0)(111=843,159,1369,614,0)(114=277,416,803,794,0)(115=537,149,1054,536,0)(116=1253,49,1479,299,0)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -163,7 +163,7 @@
         <Wi>
           <IntNumber>0</IntNumber>
           <FirstString>RESET</FirstString>
-          <SecondString>PORT = PORT &amp; ~0X8000; PORT = PORT | 0X8000;</SecondString>
+          <SecondString>PORT = PORT &amp; ~0X8000; PORT = PORT | 0X8000</SecondString>
         </Wi>
         <Wi>
           <IntNumber>1</IntNumber>
@@ -195,7 +195,7 @@
         <aLwin>1</aLwin>
         <aCover>0</aCover>
         <aSer1>1</aSer1>
-        <aSer2>1</aSer2>
+        <aSer2>0</aSer2>
         <aPa>0</aPa>
         <viewmode>1</viewmode>
         <vrSel>0</vrSel>
@@ -209,7 +209,7 @@
         <aLa>0</aLa>
         <aPa1>0</aPa1>
         <AscS4>0</AscS4>
-        <aSer4>1</aSer4>
+        <aSer4>0</aSer4>
         <StkLoc>0</StkLoc>
         <TrcWin>0</TrcWin>
         <newCpu>0</newCpu>
@@ -726,6 +726,18 @@
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
+    <File>
+      <GroupNumber>3</GroupNumber>
+      <FileNumber>39</FileNumber>
+      <FileType>5</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\cadenas.h</PathWithFileName>
+      <FilenameWithoutPath>cadenas.h</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
   </Group>
 
   <Group>
@@ -736,7 +748,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>4</GroupNumber>
-      <FileNumber>39</FileNumber>
+      <FileNumber>40</FileNumber>
       <FileType>2</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -748,7 +760,7 @@
     </File>
     <File>
       <GroupNumber>4</GroupNumber>
-      <FileNumber>40</FileNumber>
+      <FileNumber>41</FileNumber>
       <FileType>2</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -760,7 +772,7 @@
     </File>
     <File>
       <GroupNumber>4</GroupNumber>
-      <FileNumber>41</FileNumber>
+      <FileNumber>42</FileNumber>
       <FileType>2</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -772,7 +784,7 @@
     </File>
     <File>
       <GroupNumber>4</GroupNumber>
-      <FileNumber>42</FileNumber>
+      <FileNumber>43</FileNumber>
       <FileType>2</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>

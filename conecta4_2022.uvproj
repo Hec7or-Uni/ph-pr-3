@@ -621,6 +621,11 @@
               <FileType>5</FileType>
               <FilePath>.\UART0.h</FilePath>
             </File>
+            <File>
+              <FileName>cadenas.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\cadenas.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
