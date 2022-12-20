@@ -129,7 +129,6 @@ void g_serie_encolar_comenzar(void);
 
 /**
  * @brief
- * @param buffer
  */
 void g_serie_iniciar(void);
 
