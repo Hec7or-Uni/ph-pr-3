@@ -5,6 +5,7 @@
     "g_serie.h": "c",
     "uart0.h": "c",
     "inttypes.h": "c",
-    "cola_asyn.h": "c"
+    "cola_asyn.h": "c",
+    "cola_msg.h": "c"
   }
 }

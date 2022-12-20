@@ -13,14 +13,24 @@
 #include "eventos.h"
 #include "msg.h"
 #include "utils.h"
+#include "g_alarmas.h"
 
-enum { COLA_CADENAS_SIZE = 32, BUFFER_SIZE = 3, NUM_COMANDOS = 3 };
+enum {
+  COLA_CADENAS_SIZE = 32,
+
+  BUFFER_SIZE = 3,
+  NUM_COMANDOS = 2,
+
+  G_SERIE_ACTIVO = 0, 
+  G_SERIE_INACTIVO = 1,
+  G_SERIE_ESPERANDO = 2
+};
 
 void g_serie_encolar_cadena(uint8_t cadena);
 
 void g_serie_desencolar_cadena(void);
 
-int g_serie_ejecutar_cmd(char buffer[BUFFER_SIZE]);
+void g_serie_ejecutar_cmd(char buffer[BUFFER_SIZE]);
 
 void clean_buffer(char buffer[BUFFER_SIZE]);
 

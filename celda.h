@@ -21,10 +21,16 @@ typedef uint8_t CELDA;
  2: ficha negra
  */
 
+enum { FICHA_BLANCA = 1, FICHA_NEGRA = 2, FICHA_FIJADA = 3};
+
 __inline static void celda_poner_valor(CELDA *celdaptr, uint8_t val) {
-  if ((val == 1 /*blanca*/) || (val == 2 /*negra*/)) {
+  if ((val == FICHA_BLANCA) || (val == FICHA_NEGRA) || (val == FICHA_FIJADA)) {
     *celdaptr = 0x04 /*ocupado*/ + val;
   }
+}
+
+__inline static void celda_vaciar(CELDA *celdaptr) {
+  *celdaptr = 0;
 }
 
 /* *****************************************************************************
@@ -36,6 +42,7 @@ __inline static uint8_t celda_vacia(CELDA celda) { return (celda & 0x4) == 0; }
  * Devuelve color celda y si vacia 0
  */
 __inline static uint8_t celda_color(CELDA celda) { return (celda & 0x03); }
+
 /* *****************************************************************************
  * Devuelve 1 si la celda es blanca y valida
  */
@@ -45,4 +52,9 @@ __inline static uint8_t celda_blanca(CELDA celda) { return celda == 0x05; }
  * Devuelve 1 si la celda es negra y valida
  */
 __inline static uint8_t celda_negra(CELDA celda) { return celda == 0x06; }
+
+/* *****************************************************************************
+ * Devuelve 1 si la celda es fijada y valida
+ */
+__inline static uint8_t celda_fijada(CELDA celda) { return celda == 0x07; }
 #endif  // CELDA_H

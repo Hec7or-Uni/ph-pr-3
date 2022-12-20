@@ -10,14 +10,4 @@ enum { FALSE = 0, TRUE = 1, ERROR = 0xFF };
  */
 #define MSB(x) (31 - __clz(x))
 
-/**
- * @brief Multiplica por 60
- */
-#define times60(x) ((x << 6) - (x << 2))
-
-/**
- * @brief Multiplica por 3600
- */
-#define times3600(x) ((x << 12) - (x << 9) + (x << 4))
-
 #endif

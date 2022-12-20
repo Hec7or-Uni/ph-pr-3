@@ -42,12 +42,14 @@ void g_energia_tratar_mensaje(msg_t mensaje) {
       g_energia_power_down();
       break;
     case EJECUTAR:
+      // No hace falta reiniciar la alarma
+      // porque reinicia al salir de powerdown
       if (estado == POWERDOWN) {
         estado = NORMAL;
       } else {
         cola_encolar_msg(mensaje.auxData, 0);
       }
-    case ENTRADA_ACTUALIZADA:
+    case RESET_POWERDOWN:
       g_energia_reset();
       break;
   }

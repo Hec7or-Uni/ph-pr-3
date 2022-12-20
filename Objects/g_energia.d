@@ -13,4 +13,5 @@
 .\objects\g_energia.o: utils.h
 .\objects\g_energia.o: cola_msg.h
 .\objects\g_energia.o: g_alarmas.h
+.\objects\g_energia.o: contadores.h
 .\objects\g_energia.o: power.h

@@ -16,3 +16,5 @@
 .\objects\g_serie.o: celda.h
 .\objects\g_serie.o: cola_msg.h
 .\objects\g_serie.o: conecta4_2022.h
+.\objects\g_serie.o: g_alarmas.h
+.\objects\g_serie.o: contadores.h

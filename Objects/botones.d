@@ -13,3 +13,4 @@
 .\objects\botones.o: utils.h
 .\objects\botones.o: g_alarmas.h
 .\objects\botones.o: cola_msg.h
+.\objects\botones.o: contadores.h

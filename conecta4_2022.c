@@ -150,6 +150,12 @@ void C4_actualizar_tablero(CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t fila,
   celda_poner_valor(&cuadricula[(fila)][(columna)], val);
 }
 
+void C4_vaciar_celda_tablero(CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t fila,
+                           uint8_t columna) {
+  celda_vaciar(&cuadricula[(fila)][(columna)]);
+}
+
+
 // comprueba si esta jugada llena todo el tablero y hay empate
 int C4_comprobar_empate(CELDA cuadricula[TAM_FILS][TAM_COLS]) {
   for (int i = 1; i < TAM_COLS; i++) {
@@ -178,65 +184,50 @@ int C4_verificar_4_en_linea(CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t fila,
          resultado_arm_arm;
 }
 
-enum C4_estado { C4_INICIO, C4_ESPERA, C4_JUGANDO, C4_FIN };
-
-static int estado = C4_INICIO;
-static uint8_t color = 1;
-
-static CELDA tablero[7][8] = {
-    0, 0XC1, 0XC2, 0XC3, 0XC4, 0XC5, 0XC6, 0XC7, 0XF1, 0, 0,    0, 0,    0,
-    0, 0,    0XF2, 0,    0,    0,    0,    0,    0,    0, 0XF3, 0, 0,    0,
-    0, 0,    0,    0,    0XF4, 0,    0,    0,    0,    0, 0,    0, 0XF5, 0,
-    0, 0,    0,    0,    0,    0,    0XF6, 0,    0,    0, 0,    0, 0,    0};
-
-void conecta4_iniciar() {
-  color = 1;
-  cola_encolar_msg(JUGADOR, color);
+void conecta4_iniciar(CELDA tablero[TAM_FILS][TAM_COLS]) {
   for (int i = 1; i <= NUM_FILAS; i++) {
     for (int j = 1; j <= NUM_COLUMNAS; j++) {
       tablero[i][j] = 0;
     }
   }
-  estado = C4_ESPERA;
 }
 
-void C4_validar(uint8_t columna) {
-  uint8_t fila = 0;
-  int ok = C4_columna_valida(columna);
-  if (ok) fila = C4_calcular_fila(tablero, columna);
-  ok = ok && C4_fila_valida(fila);
+void C4_jugar(CELDA tablero[TAM_FILS][TAM_COLS], uint8_t *estado,
+    uint8_t *fila, uint8_t *columna) {
+  *fila = 0;
+  int ok = C4_columna_valida(*columna);
+  if (ok) *fila = C4_calcular_fila(tablero, *columna);
+  ok = ok && C4_fila_valida(*fila);
 
-  if (estado == C4_ESPERA) {
-    cola_encolar_msg(ENTRADA_VALIDADA, ok);
-  } else if (estado == C4_JUGANDO) {
-    if (ok) {
-      C4_actualizar_tablero(tablero, fila, columna, color);
-      cola_encolar_msg(JUGADA_REALIZADA, 0);
-      int fin = conecta4_hay_linea_arm_arm(tablero, fila, columna, color) ||
-                C4_comprobar_empate(tablero);
-      cola_encolar_msg(COMPROBACION_REALIZADA, 0);
-      if (fin) {
-        cola_encolar_msg(FIN, fin);
-        estado = C4_FIN;
-      } else {
-        color = C4_alternar_color(color);
-        cola_encolar_msg(JUGADOR, color);
-        estado = C4_ESPERA;
-      }
-    } else {
-      estado = C4_ESPERA;
-    }
-  }  // if (estado == C4_FIN) nothing;
-}
+  cola_encolar_msg(ENTRADA_VALIDADA, ok);
 
-void C4_jugar() {
-  if (estado != C4_FIN) {
-    cola_encolar_msg(LEER_ENTRADA, 0);
-    estado = C4_JUGANDO;
+  if (ok) {
+    *estado = C4_ESPERANDO;
+    C4_actualizar_tablero(tablero, *fila, *columna, FICHA_FIJADA);
+    cola_encolar_msg(CELDA_MARCADA, 0);
   }
 }
 
-void C4_devolver_fila(uint32_t fila) {
+void C4_confirmar_jugada(CELDA tablero[TAM_FILS][TAM_COLS], uint8_t *estado,
+    uint8_t *fila, uint8_t *columna, uint8_t *color) {
+
+  C4_actualizar_tablero(tablero, *fila, *columna, *color);
+  cola_encolar_msg(JUGADA_REALIZADA, 0);
+  int ganador = conecta4_hay_linea_arm_arm(tablero, *fila, *columna, *color);
+  int empate = C4_comprobar_empate(tablero);
+  if (ganador) {
+    cola_encolar_msg(FIN, *color);
+    *estado = C4_FIN;
+  } else if (empate) {
+    cola_encolar_msg(FIN, 0); //0 indica empate
+    *estado = C4_FIN;
+  } else {
+    *color = C4_alternar_color(*color);
+    *estado = C4_JUGANDO;
+  }
+}
+
+void C4_devolver_fila(CELDA tablero[TAM_FILS][TAM_COLS], uint32_t fila) {
   uint32_t result = fila;
   for (int col = 1; col <= NUM_COLUMNAS; col++) {
     int desplazamiento = ((col - 1) << 2) + 4;  //(col - 1) * 4 + 4
@@ -246,27 +237,40 @@ void C4_devolver_fila(uint32_t fila) {
 }
 
 void conecta4_tratar_mensaje(msg_t mensaje) {
-  static volatile uint32_t tiempo_inicial, tiempo_final, tiempo_total;
+  static uint8_t estado = C4_JUGANDO, fila, columna, color;
+  static CELDA tablero[7][8] = {
+    0, 0XC1, 0XC2, 0XC3, 0XC4, 0XC5, 0XC6, 0XC7, 0XF1, 0, 0,    0, 0,    0,
+    0, 0,    0XF2, 0,    0,    0,    0,    0,    0,    0, 0XF3, 0, 0,    0,
+    0, 0,    0,    0,    0XF4, 0,    0,    0,    0,    0, 0,    0, 0XF5, 0,
+    0, 0,    0,    0,    0,    0,    0XF6, 0,    0,    0, 0,    0, 0,    0};
+
   switch (mensaje.ID_msg) {
     case RESET:
-      conecta4_iniciar();
+      estado = C4_JUGANDO;
+      color = FICHA_BLANCA;
+      conecta4_iniciar(tablero);
       break;
     case FIN:
       estado = C4_FIN;
       break;
-    case VALIDAR_ENTRADA:
-      C4_validar(mensaje.auxData);
+    case CANCELAR:
+      estado = C4_JUGANDO;
+      C4_vaciar_celda_tablero(tablero, fila, columna);
       break;
     case JUGAR:
-      C4_jugar();
-      tiempo_inicial = mensaje.timestamp;
+      if (estado == C4_JUGANDO) {
+        columna = mensaje.auxData;
+        C4_jugar(tablero, &estado, &fila, &columna);
+      }
       break;
-    case COMPROBACION_REALIZADA:
-      tiempo_final = mensaje.timestamp;
-      tiempo_total = tiempo_final - tiempo_inicial;
+    case CONFIRMAR_JUGADA:
+      C4_confirmar_jugada(tablero, &estado, &fila, &columna, &color);
       break;
     case PEDIR_FILA:
-      C4_devolver_fila(mensaje.auxData);
+      C4_devolver_fila(tablero, mensaje.auxData);
+      break;
+    case PEDIR_JUGADOR:
+      cola_encolar_msg(JUGADOR, color);
       break;
   }
 }

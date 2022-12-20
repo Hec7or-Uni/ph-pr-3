@@ -8,6 +8,7 @@
 #include "g_io.h"
 #include "g_serie.h"
 #include "llamadas_sistema.h"
+#include "g_estadisticas.h"
 
 volatile char letra;
 
@@ -38,9 +39,7 @@ void init(void) {
   g_alarma_iniciar();
   g_energia_iniciar();
   g_serie_iniciar();
-  conecta4_iniciar();
 
-  RTC_init();
   WD_init(1);
   WD_feed();
 }
@@ -91,6 +90,9 @@ int main(void) {
       g_serie_tratar_mensaje(msg);
       g_boton_tratar_mensaje(msg);
       conecta4_tratar_mensaje(msg);
+      // El de estadísticas es el último para medir el
+      // tiempo que tardan todos
+      g_estadisticas_tratar_mensaje(msg);
     }
     if (!hay_evento && !hay_msg) g_energia_idle();
 

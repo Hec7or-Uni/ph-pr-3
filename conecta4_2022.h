@@ -18,6 +18,8 @@ enum {
   TAM_COLS = PADDING_COL + NUM_COLUMNAS
 };
 
+enum C4_estado { C4_JUGANDO, C4_ESPERANDO, C4_FIN };
+
 /* declaracion de funciones visibles en el exterior conecta4*/
 
 /**
@@ -65,6 +67,9 @@ uint8_t C4_calcular_fila(CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t columna);
 void C4_actualizar_tablero(CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t fila,
                            uint8_t columna, uint8_t val);
 
+void C4_vaciar_celda_tablero(CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t fila,
+                           uint8_t columna);
+
 int C4_comprobar_empate(CELDA cuadricula[TAM_FILS][TAM_COLS]);
 
 int C4_verificar_4_en_linea(CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t fila,
@@ -85,16 +90,23 @@ static inline uint8_t C4_fila_valida(uint8_t fila) {
 /**
  * @brief Inicializa el módulo de juego de conecta4
  */
-void conecta4_iniciar(void);
-
-/**
- * @brief Reacción del juego ante un evento VALIDAR_ENTRADA
- */
-void C4_validar(uint8_t columna);
+void conecta4_iniciar(CELDA tablero[TAM_FILS][TAM_COLS]);
 
 /**
  * @brief Reacción del juego ante un evento JUGAR
  */
-void C4_jugar(void);
+void C4_jugar(CELDA tablero[TAM_FILS][TAM_COLS], uint8_t *estado,
+              uint8_t *fila, uint8_t *columna);
+
+/**
+ * @brief Reacción del juego ante un evento CONFIRMAR_JUGADA
+ */
+void C4_confirmar_jugada(CELDA tablero[TAM_FILS][TAM_COLS], uint8_t *estado,
+                         uint8_t *fila, uint8_t *columna, uint8_t *color);
+
+/**
+ * @brief Reacción del juego ante un evento PEDIR_FILA
+ */
+void C4_devolver_fila(CELDA tablero[TAM_FILS][TAM_COLS], uint32_t fila);
 
 #endif /* CONECTA4_H_2022 */

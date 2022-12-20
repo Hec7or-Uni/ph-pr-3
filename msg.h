@@ -9,22 +9,35 @@ enum Mensajes {
 
   LATIDO,
   APAGAR_LATIDO,
+
+  PEDIR_JUGADOR,
   JUGADOR,           // auxData := turno
-  LEER_ENTRADA,      // es periódica
-  VALIDAR_ENTRADA,   // auxData := columna
   ENTRADA_VALIDADA,  // auxData := celda_valida
+
+  CELDA_MARCADA,
+  CONFIRMAR_JUGADA,
   JUGADA_REALIZADA,
   APAGAR_REALIZADA,
-  JUGAR,
-  COMPROBACION_REALIZADA,
+
+  JUGAR,     // auxData := columna
   EJECUTAR,  // auxData := mensaje a encolar
-  ENTRADA_ACTUALIZADA,
+  RESET_POWERDOWN,
 
   PEDIR_FILA,
   DEVOLVER_FILA,
 
+  PEDIR_CALIDAD_SERVICIO,
+  PEDIR_SEGUNDOS_JUGADOS, 
+  PEDIR_MINUTOS_JUGADOS,  
+
+  CALIDAD_SERVICIO, // auxData := tiempo
+  SEGUNDOS_JUGADOS, // auxData := segundos
+  MINUTOS_JUGADOS,  // auxData := minutos
+
+
+  CANCELAR,
   RESET,
-  FIN,
+  FIN, //auxData := ganador o 0 (empate)
   OVERFLOW_M
 };
 

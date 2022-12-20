@@ -13,4 +13,5 @@
 .\objects\g_io.o: utils.h
 .\objects\g_io.o: cola_msg.h
 .\objects\g_io.o: g_alarmas.h
+.\objects\g_io.o: contadores.h
 .\objects\g_io.o: gpio.h

@@ -487,6 +487,16 @@
               <FilePath>.\g_boton.c</FilePath>
             </File>
             <File>
+              <FileName>g_serie.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\g_serie.c</FilePath>
+            </File>
+            <File>
+              <FileName>g_estadisticas.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\g_estadisticas.c</FilePath>
+            </File>
+            <File>
               <FileName>semaforo_interrupciones.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\semaforo_interrupciones.c</FilePath>
@@ -505,11 +515,6 @@
               <FileName>contadores.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\contadores.c</FilePath>
-            </File>
-            <File>
-              <FileName>g_serie.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\g_serie.c</FilePath>
             </File>
             <File>
               <FileName>UART0.c</FileName>
@@ -572,6 +577,16 @@
               <FilePath>.\g_boton.h</FilePath>
             </File>
             <File>
+              <FileName>g_serie.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\g_serie.h</FilePath>
+            </File>
+            <File>
+              <FileName>g_estadisticas.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\g_estadisticas.h</FilePath>
+            </File>
+            <File>
               <FileName>celda.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\celda.h</FilePath>
@@ -610,11 +625,6 @@
               <FileName>contadores.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\contadores.h</FilePath>
-            </File>
-            <File>
-              <FileName>g_serie.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\g_serie.h</FilePath>
             </File>
             <File>
               <FileName>UART0.h</FileName>

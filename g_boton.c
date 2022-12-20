@@ -6,7 +6,7 @@ void g_boton_tratar_evento(evento_t evento) {
       if (evento.auxData == 1) {
         cola_encolar_msg(SET_ALARM,
                          g_alarma_crear(BAJAR_PULSACION_1, TRUE, 10));
-        cola_encolar_msg(EJECUTAR, JUGAR);
+        cola_encolar_msg(EJECUTAR, CANCELAR);
       } else if (evento.auxData == 2) {
         cola_encolar_msg(SET_ALARM,
                          g_alarma_crear(BAJAR_PULSACION_2, TRUE, 10));

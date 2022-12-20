@@ -1,8 +1,6 @@
 #ifndef CADENAS_H
 #define CADENAS_H
 
-#include <inttypes.h>
-
 enum Cadenas {
   CADENA_FILA1 = 0xF1,
   CADENA_FILA2 = 0xF2,
@@ -10,6 +8,10 @@ enum Cadenas {
   CADENA_FILA4 = 0xF4,
   CADENA_FILA5 = 0xF5,
   CADENA_FILA6 = 0xF6,
+
+  CADENA_CALIDAD_SERVICIO = 0xFF,
+  CADENA_SEGUNDOS_JUGADOS = 0xFE, 
+  CADENA_MINUTOS_JUGADOS = 0xFD,
 
   CADENA_CABECERA1 = 0,
   CADENA_CABECERA2 = 1,
@@ -84,7 +86,7 @@ static char *cadenas[NUM_CADENAS] = {
     "----- Ganan las Blancas -----\n\n",   //  28  = CADENA_GANAN_BLANCAS
     "----- Ganan las Negras ------\n\n",   //  29  = CADENA_GANAN_NEGRAS
     "----------- Empate ----------\n\n",   //  30  = CADENA_EMPATE
-    "----------- Reset -----------\n\n",   //  31  = CADENA_RESET
+    "----------- Reset -----------\n\n"    //  31  = CADENA_RESET
 };
 
 #endif

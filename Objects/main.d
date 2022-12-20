@@ -23,3 +23,4 @@
 .\objects\main.o: g_serie.h
 .\objects\main.o: UART0.h
 .\objects\main.o: cadenas.h
+.\objects\main.o: g_estadisticas.h

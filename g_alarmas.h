@@ -5,6 +5,7 @@
 #include "cola_msg.h"
 #include "temporizador.h"
 #include "utils.h"
+#include "contadores.h"
 
 enum { NUM_ALARMAS = 8 };
 

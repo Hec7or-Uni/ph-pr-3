@@ -12,3 +12,4 @@
 .\objects\g_alarmas.o: llamadas_sistema.h
 .\objects\g_alarmas.o: temporizador.h
 .\objects\g_alarmas.o: utils.h
+.\objects\g_alarmas.o: contadores.h
