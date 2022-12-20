@@ -3,11 +3,12 @@
 // ----- REAL TIME CLOCK -----
 
 void RTC_init(void) {
-  CCR = CCR | 3;   // PCLK = 60E6 Hz / 4 = 15E6Hz
-  PREINT = 1830;   // PREINT = int (PCLK / 32768) - 1 = 456
-  PREFRAC = 1792;  // EFRAC = PCLK - ([PREINT + 1] * 32768) = 25024
+  CCR = CCR & ~1;  
+                    // PCLK = 60E6 Hz / 4 = 15E6Hz
+  PREINT = 456;     // PREINT = int (PCLK / 32768) - 1 = 456
+  PREFRAC = 25024;  // PREFRAC = PCLK - ([PREINT + 1] * 32768) = 25024
 
-  CCR = CCR | 3;  //  Reset and enable
+  CCR = CCR | 3;  // Reset y enable
   CCR = CCR & ~2; // Empieza a contar
 }
 

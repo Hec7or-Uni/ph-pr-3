@@ -6,6 +6,9 @@
     "uart0.h": "c",
     "inttypes.h": "c",
     "cola_asyn.h": "c",
-    "cola_msg.h": "c"
+    "cola_msg.h": "c",
+    "g_estadisticas.h": "c",
+    "temporizador.h": "c",
+    "contadores.h": "c"
   }
 }

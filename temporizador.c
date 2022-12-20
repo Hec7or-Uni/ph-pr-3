@@ -23,7 +23,7 @@ void temporizador_empezar() {
   T1TCR = T1TCR | 0x1;  // comienza a contar
 }
 
-uint32_t temporizador_leer() { return T1TC; }
+uint32_t temporizador_leer() { return clock_get_us(); }
 
 uint32_t temporizador_parar() {
   uint32_t time = T1TC;

@@ -5,10 +5,10 @@
 #include "g_alarmas.h"
 #include "g_boton.h"
 #include "g_energia.h"
+#include "g_estadisticas.h"
 #include "g_io.h"
 #include "g_serie.h"
 #include "llamadas_sistema.h"
-#include "g_estadisticas.h"
 
 volatile char letra;
 

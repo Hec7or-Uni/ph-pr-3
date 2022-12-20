@@ -22,7 +22,7 @@ void g_serie_encolar_cadena(uint8_t cadena) {
 }
 
 void g_serie_desencolar_cadena(void) {
-  if (first == last && !full) return; //Si está vacía no hace nada
+  if (first == last && !full) return;  // Si está vacía no hace nada
 
   first++;
   if (first == COLA_CADENAS_SIZE) {
@@ -58,7 +58,7 @@ int g_serie_check_c(char buffer[BUFFER_SIZE]) {
       return TRUE;
     } else if (buffer[2] >= '0' && buffer[2] <= '9') {
       uint32_t decenas = buffer[1] - '0';
-      uint32_t decenasX10 = (decenas << 3) + (decenas << 1); // 10x = 8x + 2x
+      uint32_t decenasX10 = (decenas << 3) + (decenas << 1);  // 10x = 8x + 2x
       uint32_t unidades = buffer[2] - '0';
       cola_encolar_msg(JUGAR, decenasX10 + unidades);
       return TRUE;
@@ -121,7 +121,7 @@ char g_serie_codificar_jugador(CELDA celda) {
     return 'B';
   } else if (celda_negra(celda)) {
     return 'N';
-  } // celda_fijada(celda)
+  }  // celda_fijada(celda)
   return '*';
 }
 
@@ -154,24 +154,24 @@ void g_serie_itoa(char array[], uint32_t i, uint32_t x) {
   }
 }
 
-void g_serie_mostrar_qos(uint32_t datosFila) {
+void g_serie_mostrar_qos(uint32_t latencia) {
   char array[BUFFER_ENVIO_SIZE + 1] = "Latencia:                 Xus\n\n";
-  g_serie_itoa(array, 26 /*Posicion de la X*/, datosFila);
+  g_serie_itoa(array, 26 /*Posicion de la X*/, latencia);
+  // g_serie_itoa(array, 26 /*Posicion de la X*/, 365);
   uart0_enviar_array(array);
 }
 
-void g_serie_mostrar_minutos(uint32_t datosFila) {
+void g_serie_mostrar_minutos(uint32_t minutos) {
   char array[BUFFER_ENVIO_SIZE + 1] = "Tiempo jugado:         Xm";
-  g_serie_itoa(array, 23 /*Posicion de la X*/, datosFila);
+  g_serie_itoa(array, 23 /*Posicion de la X*/, minutos);
   uart0_enviar_array(array);
 }
 
-void g_serie_mostrar_segundos(uint32_t datosFila) {
+void g_serie_mostrar_segundos(uint32_t segundos) {
   char array[BUFFER_ENVIO_SIZE + 1] = "  Ys\n";
-  g_serie_itoa(array, 2 /*Posicion de la Y*/, datosFila);
+  g_serie_itoa(array, 2 /*Posicion de la Y*/, segundos);
   uart0_enviar_array(array);
 }
-
 
 void g_serie_encolar_tablero() {
   for (uint8_t c = CADENA_FILA6; c >= CADENA_FILA1; c--) {
@@ -192,7 +192,7 @@ void g_serie_tratar_evento(evento_t evento) {
     case CARACTER_RECIBIDO:
       g_serie_caracter_recibido(evento.auxData);
       // Avisamos al g_energia de que resetee la alarma de Power-Down
-      cola_encolar_msg(RESET_POWERDOWN, 0); 
+      cola_encolar_msg(RESET_POWERDOWN, 0);
       break;
     case CARACTER_ENVIADO:
       if (!uart0_continuar_envio()) {
@@ -211,7 +211,7 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
     case CELDA_MARCADA:
       estado = G_SERIE_ESPERANDO;
       cola_encolar_msg(SET_ALARM,
-          g_alarma_crear(CONFIRMAR_JUGADA, FALSE, 1000));
+                       g_alarma_crear(CONFIRMAR_JUGADA, FALSE, 1000));
       g_serie_encolar_tablero();
       g_serie_encolar_cadena(CADENA_CANCELAR1);
       g_serie_encolar_cadena(CADENA_CANCELAR2);
@@ -238,7 +238,7 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
       g_serie_mostrar_segundos(mensaje.auxData);
       break;
     case ENTRADA_VALIDADA:
-      if (!mensaje.auxData) { //Si no es valida
+      if (!mensaje.auxData) {  // Si no es valida
         g_serie_encolar_cadena(CADENA_COLUMNA_NO_VALIDA);
       }
       break;
@@ -247,8 +247,7 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
         estado = G_SERIE_ACTIVO;
         g_serie_encolar_tablero();
       } else if (estado == G_SERIE_ESPERANDO) {
-        cola_encolar_msg(SET_ALARM,
-            g_alarma_crear(CONFIRMAR_JUGADA, FALSE, 0));
+        cola_encolar_msg(SET_ALARM, g_alarma_crear(CONFIRMAR_JUGADA, FALSE, 0));
         estado = G_SERIE_ACTIVO;
         g_serie_encolar_cadena(CADENA_CANCELADO);
         g_serie_encolar_tablero();
@@ -258,9 +257,6 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
     case RESET:
       if (estado != G_SERIE_INACTIVO) {
         g_serie_encolar_cadena(CADENA_RESET);
-        g_serie_encolar_cadena(CADENA_MINUTOS_JUGADOS);
-        g_serie_encolar_cadena(CADENA_SEGUNDOS_JUGADOS);
-        g_serie_encolar_cadena(CADENA_CALIDAD_SERVICIO);
       }
       estado = G_SERIE_ACTIVO;
       g_serie_encolar_tablero();
