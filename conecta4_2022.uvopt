@@ -142,7 +142,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGDARM</Key>
-          <Name>(134=-1,-1,-1,-1,0)(135=-1,-1,-1,-1,0)(107=-1,-1,-1,-1,0)(108=429,194,586,314,0)(106=994,204,1272,558,0)(105=849,53,1039,297,0)(80=882,128,1393,538,0)(104=234,30,550,449,0)(100=871,12,1454,194,1)(113=361,187,746,628,0)(112=220,154,718,864,0)(136=-1,-1,-1,-1,0)(117=195,234,475,631,0)(110=615,197,1141,652,0)(111=843,159,1369,614,0)(114=277,416,803,794,0)(115=229,68,746,455,1)(116=1253,49,1479,299,0)</Name>
+          <Name>(134=-1,-1,-1,-1,0)(135=-1,-1,-1,-1,0)(107=-1,-1,-1,-1,0)(108=429,194,586,314,0)(106=994,204,1272,558,0)(105=849,53,1039,297,0)(80=882,128,1393,538,0)(104=234,30,550,449,0)(100=871,12,1454,194,0)(113=361,187,746,628,0)(112=220,154,718,864,0)(136=-1,-1,-1,-1,0)(117=195,234,475,631,0)(110=615,197,1141,652,0)(111=843,159,1369,614,0)(114=277,416,803,794,0)(115=224,12,741,399,0)(116=1253,49,1479,299,0)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -182,8 +182,38 @@
         </Wi>
         <Wi>
           <IntNumber>4</IntNumber>
-          <FirstString>C</FirstString>
-          <SecondString>S0IN = '#'; S0IN = 'C'; S0IN = '!'</SecondString>
+          <FirstString>C1</FirstString>
+          <SecondString>S0IN = '#'; S0IN = 'C'; S0IN = '1'; S0IN = '!'</SecondString>
+        </Wi>
+        <Wi>
+          <IntNumber>5</IntNumber>
+          <FirstString>C2</FirstString>
+          <SecondString>S0IN = '#'; S0IN = 'C'; S0IN = '2'; S0IN = '!'</SecondString>
+        </Wi>
+        <Wi>
+          <IntNumber>6</IntNumber>
+          <FirstString>C3</FirstString>
+          <SecondString>S0IN = '#'; S0IN = 'C'; S0IN = '3'; S0IN = '!'</SecondString>
+        </Wi>
+        <Wi>
+          <IntNumber>7</IntNumber>
+          <FirstString>C4</FirstString>
+          <SecondString>S0IN = '#'; S0IN = 'C'; S0IN = '4'; S0IN = '!'</SecondString>
+        </Wi>
+        <Wi>
+          <IntNumber>8</IntNumber>
+          <FirstString>C5</FirstString>
+          <SecondString>S0IN = '#'; S0IN = 'C'; S0IN = '5'; S0IN = '!'</SecondString>
+        </Wi>
+        <Wi>
+          <IntNumber>9</IntNumber>
+          <FirstString>C6</FirstString>
+          <SecondString>S0IN = '#'; S0IN = 'C'; S0IN = '6'; S0IN = '!'</SecondString>
+        </Wi>
+        <Wi>
+          <IntNumber>10</IntNumber>
+          <FirstString>C7</FirstString>
+          <SecondString>S0IN = '#'; S0IN = 'C'; S0IN = '7'; S0IN = '!'</SecondString>
         </Wi>
       </ToolboxButtons>
       <Tracepoint>

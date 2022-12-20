@@ -187,6 +187,12 @@ void g_serie_encolar_inicio() {
   }
 }
 
+void g_serie_encolar_comenzar() {
+  for (uint8_t c = CADENA_COMENZAR1; c <= CADENA_COMENZAR4; c++) {
+    g_serie_encolar_cadena(c);
+  }
+}
+
 void g_serie_tratar_evento(evento_t evento) {
   switch (evento.ID_evento) {
     case CARACTER_RECIBIDO:
@@ -265,16 +271,18 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
     case FIN:
       if (estado != G_SERIE_INACTIVO) {
         estado = G_SERIE_INACTIVO;
+        g_serie_encolar_cadena(CADENA_FIN);
         if (mensaje.auxData == FICHA_BLANCA) {
           g_serie_encolar_cadena(CADENA_GANAN_BLANCAS);
         } else if (mensaje.auxData == FICHA_NEGRA) {
           g_serie_encolar_cadena(CADENA_GANAN_NEGRAS);
-        } else {
+        } else if (mensaje.auxData == FICHA_FIJADA) {
           g_serie_encolar_cadena(CADENA_EMPATE);
         }
         g_serie_encolar_cadena(CADENA_MINUTOS_JUGADOS);
         g_serie_encolar_cadena(CADENA_SEGUNDOS_JUGADOS);
         g_serie_encolar_cadena(CADENA_CALIDAD_SERVICIO);
+        g_serie_encolar_comenzar();
       }
       break;
   }

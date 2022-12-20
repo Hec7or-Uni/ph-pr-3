@@ -151,10 +151,9 @@ void C4_actualizar_tablero(CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t fila,
 }
 
 void C4_vaciar_celda_tablero(CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t fila,
-                           uint8_t columna) {
+                             uint8_t columna) {
   celda_vaciar(&cuadricula[(fila)][(columna)]);
 }
-
 
 // comprueba si esta jugada llena todo el tablero y hay empate
 int C4_comprobar_empate(CELDA cuadricula[TAM_FILS][TAM_COLS]) {
@@ -192,8 +191,8 @@ void conecta4_iniciar(CELDA tablero[TAM_FILS][TAM_COLS]) {
   }
 }
 
-void C4_jugar(CELDA tablero[TAM_FILS][TAM_COLS], uint8_t *estado,
-    uint8_t *fila, uint8_t *columna) {
+void C4_jugar(CELDA tablero[TAM_FILS][TAM_COLS], uint8_t *estado, uint8_t *fila,
+              uint8_t *columna) {
   *fila = 0;
   int ok = C4_columna_valida(*columna);
   if (ok) *fila = C4_calcular_fila(tablero, *columna);
@@ -209,8 +208,7 @@ void C4_jugar(CELDA tablero[TAM_FILS][TAM_COLS], uint8_t *estado,
 }
 
 void C4_confirmar_jugada(CELDA tablero[TAM_FILS][TAM_COLS], uint8_t *estado,
-    uint8_t *fila, uint8_t *columna, uint8_t *color) {
-
+                         uint8_t *fila, uint8_t *columna, uint8_t *color) {
   C4_actualizar_tablero(tablero, *fila, *columna, *color);
   cola_encolar_msg(JUGADA_REALIZADA, 0);
   int ganador = conecta4_hay_linea_arm_arm(tablero, *fila, *columna, *color);
@@ -219,7 +217,7 @@ void C4_confirmar_jugada(CELDA tablero[TAM_FILS][TAM_COLS], uint8_t *estado,
     cola_encolar_msg(FIN, *color);
     *estado = C4_FIN;
   } else if (empate) {
-    cola_encolar_msg(FIN, 0); //0 indica empate
+    cola_encolar_msg(FIN, FICHA_FIJADA);  // empate
     *estado = C4_FIN;
   } else {
     *color = C4_alternar_color(*color);
@@ -239,10 +237,10 @@ void C4_devolver_fila(CELDA tablero[TAM_FILS][TAM_COLS], uint32_t fila) {
 void conecta4_tratar_mensaje(msg_t mensaje) {
   static uint8_t estado = C4_JUGANDO, fila, columna, color;
   static CELDA tablero[7][8] = {
-    0, 0XC1, 0XC2, 0XC3, 0XC4, 0XC5, 0XC6, 0XC7, 0XF1, 0, 0,    0, 0,    0,
-    0, 0,    0XF2, 0,    0,    0,    0,    0,    0,    0, 0XF3, 0, 0,    0,
-    0, 0,    0,    0,    0XF4, 0,    0,    0,    0,    0, 0,    0, 0XF5, 0,
-    0, 0,    0,    0,    0,    0,    0XF6, 0,    0,    0, 0,    0, 0,    0};
+      0, 0XC1, 0XC2, 0XC3, 0XC4, 0XC5, 0XC6, 0XC7, 0XF1, 0, 0,    0, 0,    0,
+      0, 0,    0XF2, 0,    0,    0,    0,    0,    0,    0, 0XF3, 0, 0,    0,
+      0, 0,    0,    0,    0XF4, 0,    0,    0,    0,    0, 0,    0, 0XF5, 0,
+      0, 0,    0,    0,    0,    0,    0XF6, 0,    0,    0, 0,    0, 0,    0};
 
   switch (mensaje.ID_msg) {
     case RESET:

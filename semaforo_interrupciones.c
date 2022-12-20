@@ -12,8 +12,7 @@ void liberar_interrupciones() {
   if (i_flag == 0 && f_flag == 0) {
     enable_irq_fiq();
   } else if (i_flag == 0 && f_flag == 1) {
-    enable_irq_fiq();
-    disable_fiq();
+    enable_irq();
   } else if (i_flag == 1 && f_flag == 0) {
     enable_fiq();
   }  // else {ya están desactivadas}

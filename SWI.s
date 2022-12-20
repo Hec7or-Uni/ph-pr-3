@@ -38,6 +38,10 @@ SWI_Handler
                 BEQ     __enable_irq_fiq
                 CMP     R12, #0xFC
                 BEQ     __disable_irq_fiq
+                CMP     R12, #0xFB
+                BEQ     __enable_irq
+                CMP     R12, #0xFA
+                BEQ     __disable_irq
 
                 LDR     R8, SWI_Count
                 CMP     R12, R8
@@ -124,6 +128,24 @@ __enable_irq_fiq
 __disable_irq_fiq
   LDMFD   SP!, {R8, R12}            ; Load R8, SPSR
   ORR     R12, R12, #I_Bit:OR:F_Bit ; i bit = 0; f bit = 0
+  MSR     SPSR_cxsf, R12            ; Set SPSR
+  LDMFD   SP!, {R12, PC}^           ; Restore R12 and Return
+
+;/**
+; * @brief Activa sólo las interrupciones irq en el registro de estado.
+; */
+  __enable_irq
+  LDMFD   SP!, {R8, R12}            ; Load R8, SPSR
+  BIC     R12, R12, #I_Bit ; i bit = 0; f bit = 0
+  MSR     SPSR_cxsf, R12            ; Set SPSR
+  LDMFD   SP!, {R12, PC}^           ; Restore R12 and Return
+
+;/**
+; * @brief Desactiva sólo las interrupciones irq en el registro de estado.
+; */
+__disable_irq
+  LDMFD   SP!, {R8, R12}            ; Load R8, SPSR
+  ORR     R12, R12, #I_Bit ; i bit = 0; f bit = 0
   MSR     SPSR_cxsf, R12            ; Set SPSR
   LDMFD   SP!, {R12, PC}^           ; Restore R12 and Return
 

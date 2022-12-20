@@ -10,7 +10,7 @@ enum Cadenas {
   CADENA_FILA6 = 0xF6,
 
   CADENA_CALIDAD_SERVICIO = 0xFF,
-  CADENA_SEGUNDOS_JUGADOS = 0xFE, 
+  CADENA_SEGUNDOS_JUGADOS = 0xFE,
   CADENA_MINUTOS_JUGADOS = 0xFD,
 
   CADENA_CABECERA1 = 0,
@@ -34,6 +34,12 @@ enum Cadenas {
   CADENA_CABECERA19 = 18,
   CADENA_CABECERA20 = 19,
 
+  // Alias 16 - 19
+  CADENA_COMENZAR1 = 16,
+  CADENA_COMENZAR2 = 17,
+  CADENA_COMENZAR3 = 18,
+  CADENA_COMENZAR4 = 19,
+
   CADENA_TURNO_BLANCAS = 20,
   CADENA_TURNO_NEGRAS = 21,
 
@@ -50,8 +56,9 @@ enum Cadenas {
   CADENA_GANAN_NEGRAS = 29,
   CADENA_EMPATE = 30,
   CADENA_RESET = 31,
+  CADENA_FIN = 32,
 
-  NUM_CADENAS = 32
+  NUM_CADENAS = 33
 };
 
 static char *cadenas[NUM_CADENAS] = {
@@ -75,18 +82,19 @@ static char *cadenas[NUM_CADENAS] = {
     "  Pulsa un boton o ejecuta\n",        //  17  = CADENA_CABECERA18
     " #NEW! para comenzar jugar.\n",       //  18  = CADENA_CABECERA19
     "-----------------------------\n\n",   //  19  = CADENA_CABECERA20
-    "------ Turno de Blancas -----\n\n",   //  20  = CADENA_TURNO_BLANCAS
-    "------ Turno de Negras ------\n\n",   //  21  = CADENA_TURNO_NEGRAS
+    "   || Turno de Blancas ||\n\n",       //  20  = CADENA_TURNO_BLANCAS
+    "   || Turno de Negras  ||\n\n",       //  21  = CADENA_TURNO_NEGRAS
     "!! -- Columna no valida -- !!\n\n",   //  22  = CADENA_COLUMNA_NO_VALIDA
     "!! -- Pulsa CANCEL para -- !!\n",     //  23  = CADENA_CANCELAR1
     "           cancelar\n\n",             //  24  = CADENA_CANCELAR2
     "# -- Movimiento cancelado -- #\n\n",  //  25  = CADENA_CANCELAR3
     "      ----------------\n",            //  26  = CADENA_BASE1
     "      -|1|2|3|4|5|6|7|\n\n",          //  27  = CADENA_BASE2
-    "----- Ganan las Blancas -----\n\n",   //  28  = CADENA_GANAN_BLANCAS
-    "----- Ganan las Negras ------\n\n",   //  29  = CADENA_GANAN_NEGRAS
-    "----------- Empate ----------\n\n",   //  30  = CADENA_EMPATE
-    "----------- Reset -----------\n\n"    //  31  = CADENA_RESET
+    "===== Ganan las Blancas =====\n\n",   //  28  = CADENA_GANAN_BLANCAS
+    "===== Ganan las Negras  =====\n\n",   //  29  = CADENA_GANAN_NEGRAS
+    "=========== Empate ==========\n\n",   //  30  = CADENA_EMPATE
+    "----------- RESET -----------\n\n",   //  31  = CADENA_RESET
+    "------ FIN DE PARTIDA -------\n\n"    //  32  = CADENA FIN
 };
 
 #endif

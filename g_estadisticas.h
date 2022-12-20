@@ -3,7 +3,6 @@
 
 #include "cola_msg.h"
 #include "contadores.h"
-#include "llamadas_sistema.h"
 #include "msg.h"
 #include "temporizador.h"
 
