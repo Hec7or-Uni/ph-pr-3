@@ -1,3 +1,11 @@
+/**
+ * @file celda.h
+ * @authors: Profesores de la asignatura &
+ *           Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Tipo Abstracto de Datos. Encapsula el formato de celda
+ */
+
 #ifndef CONECTA4_H_2022
 #define CONECTA4_H_2022
 
@@ -68,7 +76,7 @@ void C4_actualizar_tablero(CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t fila,
                            uint8_t columna, uint8_t val);
 
 void C4_vaciar_celda_tablero(CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t fila,
-                           uint8_t columna);
+                             uint8_t columna);
 
 int C4_comprobar_empate(CELDA cuadricula[TAM_FILS][TAM_COLS]);
 
@@ -95,8 +103,8 @@ void conecta4_iniciar(CELDA tablero[TAM_FILS][TAM_COLS]);
 /**
  * @brief Reacción del juego ante un evento JUGAR
  */
-void C4_jugar(CELDA tablero[TAM_FILS][TAM_COLS], uint8_t *estado,
-              uint8_t *fila, uint8_t *columna);
+void C4_jugar(CELDA tablero[TAM_FILS][TAM_COLS], uint8_t *estado, uint8_t *fila,
+              uint8_t *columna);
 
 /**
  * @brief Reacción del juego ante un evento CONFIRMAR_JUGADA

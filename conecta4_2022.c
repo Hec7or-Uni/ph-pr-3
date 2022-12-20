@@ -1,3 +1,11 @@
+/**
+ * @file celda.h
+ * @authors: Profesores de la asignatura &
+ *           Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Tipo Abstracto de Datos. Encapsula el formato de celda
+ */
+
 #include "conecta4_2022.h"
 
 // devuelve ERROR en caso de no encontrar fila

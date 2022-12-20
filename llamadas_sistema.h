@@ -1,3 +1,11 @@
+/**
+ * @file llamadas_sistema.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Definición de funciones para el manejo de las llamadas al
+ * sistema
+ */
+
 #ifndef LLAMADAS_SISTEMA_H
 #define LLAMADAS_SISTEMA_H
 

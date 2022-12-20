@@ -1,3 +1,10 @@
+/**
+ * @file temporizador.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Definicion de funciones para el manejo del temporizador
+ */
+
 #ifndef TEMPORIZADOR_H
 #define TEMPORIZADOR_H
 

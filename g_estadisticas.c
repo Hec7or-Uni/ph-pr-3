@@ -1,3 +1,10 @@
+/**
+ * @file g_estadisticas.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Implementación de funciones para el manejo de las estadísticas
+ */
+
 #include "g_estadisticas.h"
 
 void g_estadisticas_tratar_mensaje(msg_t mensaje) {

@@ -1,3 +1,10 @@
+/**
+ * @file g_boton.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Implementación de funciones para el manejo de los botones
+ */
+
 #include "botones.h"
 
 void g_boton_tratar_evento(evento_t evento) {

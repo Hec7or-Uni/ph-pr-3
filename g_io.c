@@ -1,3 +1,10 @@
+/**
+ * @file g_io.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Implementación de funciones para el manejo de la entrada/salida
+ */
+
 #include "g_io.h"
 
 void g_io_iniciar() {
@@ -50,7 +57,7 @@ void g_io_tratar_mensaje(msg_t mensaje) {
   switch (mensaje.ID_msg) {
     case JUGADA_REALIZADA:
       g_io_encender_realizada();
-			estado = G_IO_FIN_LIBRE;
+      estado = G_IO_FIN_LIBRE;
       break;
     case CANCELAR:
       estado = G_IO_FIN_LIBRE;

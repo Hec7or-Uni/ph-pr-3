@@ -1,3 +1,10 @@
+/**
+ * @file g_alarmas.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Implementación de funciones para el manejo de las alarmas
+ */
+
 #include "g_alarmas.h"
 
 // Vector de alarmas

@@ -1,3 +1,10 @@
+/**
+ * @file UART0.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Implementacion de funciones para el manejo de la UART0
+ */
+
 #include "UART0.h"
 
 static uint8_t indice_envio = 0, longitud;

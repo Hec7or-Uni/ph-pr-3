@@ -9,6 +9,7 @@
     "cola_msg.h": "c",
     "g_estadisticas.h": "c",
     "temporizador.h": "c",
-    "contadores.h": "c"
+    "contadores.h": "c",
+    "g_energia.h": "c"
   }
 }

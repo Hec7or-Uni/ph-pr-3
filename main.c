@@ -1,3 +1,10 @@
+/**
+ * @file main.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Programa principal del juego conecta 4
+ */
+
 #include "cola_asyn.h"
 #include "cola_msg.h"
 #include "conecta4_2022.h"

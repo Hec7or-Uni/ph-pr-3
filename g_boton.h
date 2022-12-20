@@ -1,3 +1,10 @@
+/**
+ * @file g_boton.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Definición de funciones para el manejo de los botones
+ */
+
 #ifndef G_BOTONES_H
 #define G_BOTONES_H
 

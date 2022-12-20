@@ -1,3 +1,11 @@
+/**
+ * @file g_serie.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Implementación de funciones para el manejo de la comunicación
+ * por serie
+ */
+
 #include "g_serie.h"
 
 static uint8_t first = 0, last = 0, full = FALSE;
@@ -173,7 +181,7 @@ void g_serie_mostrar_segundos(uint32_t segundos) {
   uart0_enviar_array(array);
 }
 
-void g_serie_encolar_tablero() {
+void g_serie_encolar_tablero(void) {
   for (uint8_t c = CADENA_FILA6; c >= CADENA_FILA1; c--) {
     g_serie_encolar_cadena(c);
   }
@@ -181,16 +189,21 @@ void g_serie_encolar_tablero() {
   g_serie_encolar_cadena(CADENA_BASE2);
 }
 
-void g_serie_encolar_inicio() {
+void g_serie_encolar_inicio(void) {
   for (uint8_t c = CADENA_CABECERA1; c <= CADENA_CABECERA20; c++) {
     g_serie_encolar_cadena(c);
   }
 }
 
-void g_serie_encolar_comenzar() {
+void g_serie_encolar_comenzar(void) {
   for (uint8_t c = CADENA_COMENZAR1; c <= CADENA_COMENZAR4; c++) {
     g_serie_encolar_cadena(c);
   }
+}
+
+void g_serie_iniciar(void) {
+  uart0_iniciar();
+  g_serie_encolar_inicio();
 }
 
 void g_serie_tratar_evento(evento_t evento) {
@@ -228,10 +241,12 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
       estado = G_SERIE_ACTIVO;
       break;
     case JUGADOR:
-      if (mensaje.auxData == FICHA_BLANCA)
-        g_serie_encolar_cadena(CADENA_TURNO_BLANCAS);
-      else if (mensaje.auxData == FICHA_NEGRA)
-        g_serie_encolar_cadena(CADENA_TURNO_NEGRAS);
+      if (estado == G_SERIE_ACTIVO) {
+        if (mensaje.auxData == FICHA_BLANCA)
+          g_serie_encolar_cadena(CADENA_TURNO_BLANCAS);
+        else if (mensaje.auxData == FICHA_NEGRA)
+          g_serie_encolar_cadena(CADENA_TURNO_NEGRAS);
+      }
       break;
     case CALIDAD_SERVICIO:
       g_serie_mostrar_qos(mensaje.auxData);
@@ -288,9 +303,4 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
       }
       break;
   }
-}
-
-void g_serie_iniciar(void) {
-  uart0_iniciar();
-  g_serie_encolar_inicio();
 }

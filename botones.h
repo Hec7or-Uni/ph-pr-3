@@ -1,3 +1,10 @@
+/**
+ * @file botones.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Definición de funciones para el manejo de los botones
+ */
+
 #ifndef BOTONES_H
 #define BOTONES_H
 
@@ -5,15 +12,15 @@
 #include <inttypes.h>
 
 #include "cola_asyn.h"
-#include "msg.h"
 #include "eventos.h"
 #include "g_alarmas.h"
+#include "msg.h"
 #include "utils.h"
 
 /**
  * @brief Prepara la configuración de las interrupciones para los
  *  botones 1 y 2.
- */ 
+ */
 void botones_iniciar(void);
 
 /**

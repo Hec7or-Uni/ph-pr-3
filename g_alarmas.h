@@ -1,11 +1,18 @@
+/**
+ * @file g_alarmas.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Definición de funciones para el manejo de las alarmas
+ */
+
 #ifndef GESTOR_ALARMAS_H
 #define GESTOR_ALARMAS_H
 #include <inttypes.h>
 
 #include "cola_msg.h"
+#include "contadores.h"
 #include "temporizador.h"
 #include "utils.h"
-#include "contadores.h"
 
 enum { NUM_ALARMAS = 8 };
 

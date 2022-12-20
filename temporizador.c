@@ -1,3 +1,10 @@
+/**
+ * @file temporizador.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Implementacion de funciones para el manejo del temporizador
+ */
+
 #include "temporizador.h"
 
 void timer0_IRC(void) __irq {

@@ -1,3 +1,10 @@
+/**
+ * @file gpio.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Definición de funciones para el manejo del GPIO
+ */
+
 #include "gpio.h"
 
 void gpio_iniciar(void) {

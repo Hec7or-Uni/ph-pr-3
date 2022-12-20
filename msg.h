@@ -1,3 +1,10 @@
+/**
+ * @file msg.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Definición de los mensajes
+ */
+
 #ifndef MSG_H
 #define MSG_H
 
@@ -27,17 +34,16 @@ enum Mensajes {
   DEVOLVER_FILA,
 
   PEDIR_CALIDAD_SERVICIO,
-  PEDIR_SEGUNDOS_JUGADOS, 
-  PEDIR_MINUTOS_JUGADOS,  
+  PEDIR_SEGUNDOS_JUGADOS,
+  PEDIR_MINUTOS_JUGADOS,
 
-  CALIDAD_SERVICIO, // auxData := tiempo
-  SEGUNDOS_JUGADOS, // auxData := segundos
-  MINUTOS_JUGADOS,  // auxData := minutos
-
+  CALIDAD_SERVICIO,  // auxData := tiempo
+  SEGUNDOS_JUGADOS,  // auxData := segundos
+  MINUTOS_JUGADOS,   // auxData := minutos
 
   CANCELAR,
   RESET,
-  FIN, //auxData := ganador o 0 (empate)
+  FIN,  // auxData := ganador o 0 (empate)
   OVERFLOW_M
 };
 

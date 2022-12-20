@@ -1,3 +1,11 @@
+/**
+ * @file cola_msg.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Implementación de funciones para el manejo de la cola de
+ * mensajes
+ */
+
 #include "cola_msg.h"
 
 static uint8_t first = 0, last = 0, full = FALSE;

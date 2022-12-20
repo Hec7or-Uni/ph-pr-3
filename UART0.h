@@ -1,3 +1,10 @@
+/**
+ * @file UART0.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Definicion de funciones para el manejo de la UART0
+ */
+
 #ifndef UART_ZERO_H
 #define UART_ZERO_H
 

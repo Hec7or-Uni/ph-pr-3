@@ -1,3 +1,10 @@
+/**
+ * @file g_energia.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Definición de funciones para el manejo de la energía
+ */
+
 #ifndef GESTOR_ENERGIA_H
 #define GESTOR_ENERGIA_H
 

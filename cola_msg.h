@@ -1,3 +1,10 @@
+/**
+ * @file cola_msg.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Definición de funciones para el manejo de la cola de mensajes
+ */
+
 #ifndef COLA_MSG_H
 #define COLA_MSG_H
 #include <inttypes.h>

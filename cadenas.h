@@ -1,3 +1,10 @@
+/**
+ * @file cadenas.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Declara las cadenas de texto que se muestran en la pantalla
+ */
+
 #ifndef CADENAS_H
 #define CADENAS_H
 

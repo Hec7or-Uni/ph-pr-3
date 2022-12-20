@@ -1,3 +1,10 @@
+/**
+ * @file g_estadisticas.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Definición de funciones para el manejo de las estadísticas
+ */
+
 #ifndef G_ESTADISTICAS_H
 #define G_ESTADISTICAS_H
 

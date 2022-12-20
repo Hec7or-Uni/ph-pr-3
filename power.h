@@ -1,3 +1,10 @@
+/**
+ * @file power.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Definición de funciones para el manejo del bajo consumo
+ */
+
 #ifndef POWER_H
 #define POWER_H
 

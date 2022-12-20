@@ -1,3 +1,10 @@
+/**
+ * @file g_energia.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Implementación de funciones para el manejo de la energía
+ */
+
 #include "g_energia.h"
 
 static int estado = NORMAL;

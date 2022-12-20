@@ -1,3 +1,11 @@
+/**
+ * @file cola_asyn.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Implementación de funciones para el manejo de la cola de
+ * eventos
+ */
+
 #include "cola_asyn.h"
 
 // Importante que las interrupciones lean exactamente el mismo que

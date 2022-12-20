@@ -62,8 +62,8 @@ SWI_Count       DCD     SWI_Cnt
 
                 IMPORT  __SWI_0
                 IMPORT  __SWI_1
-__SWI_2 EQU read_IRQ_bit
-__SWI_3 EQU read_FIQ_bit  
+__SWI_2         EQU     read_IRQ_bit
+__SWI_3         EQU     read_FIQ_bit  
 
 SWI_Table
                 DCD     __SWI_0                ; SWI 0 Function Entry
@@ -127,7 +127,7 @@ __enable_irq_fiq
 ; */
 __disable_irq_fiq
   LDMFD   SP!, {R8, R12}            ; Load R8, SPSR
-  ORR     R12, R12, #I_Bit:OR:F_Bit ; i bit = 0; f bit = 0
+  ORR     R12, R12, #I_Bit:OR:F_Bit ; i bit = 1; f bit = 1
   MSR     SPSR_cxsf, R12            ; Set SPSR
   LDMFD   SP!, {R12, PC}^           ; Restore R12 and Return
 
@@ -136,7 +136,7 @@ __disable_irq_fiq
 ; */
 __enable_irq
   LDMFD   SP!, {R8, R12}            ; Load R8, SPSR
-  BIC     R12, R12, #I_Bit ; i bit = 0; f bit = 0
+  BIC     R12, R12, #I_Bit          ; i bit = 0
   MSR     SPSR_cxsf, R12            ; Set SPSR
   LDMFD   SP!, {R12, PC}^           ; Restore R12 and Return
 
@@ -145,7 +145,7 @@ __enable_irq
 ; */
 __disable_irq
   LDMFD   SP!, {R8, R12}            ; Load R8, SPSR
-  ORR     R12, R12, #I_Bit ; i bit = 0; f bit = 0
+  ORR     R12, R12, #I_Bit          ; i bit = 1
   MSR     SPSR_cxsf, R12            ; Set SPSR
   LDMFD   SP!, {R12, PC}^           ; Restore R12 and Return
 

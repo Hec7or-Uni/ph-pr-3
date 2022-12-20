@@ -1,3 +1,11 @@
+/**
+ * @file semaforo_interrupciones.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Implementacion de funciones para el manejo de las
+ * interrupciones
+ */
+
 #include "semaforo_interrupciones.h"
 
 static volatile uint32_t i_flag, f_flag;

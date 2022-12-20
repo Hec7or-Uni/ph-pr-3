@@ -1,3 +1,10 @@
+/**
+ * @file contadores.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Implementación de funciones para el manejo de los contadores
+ */
+
 #include "contadores.h"
 
 // ----- REAL TIME CLOCK -----

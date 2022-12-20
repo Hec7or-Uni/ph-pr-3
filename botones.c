@@ -1,3 +1,10 @@
+/**
+ * @file botones.c
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Implementación de funciones para el manejo de los botones
+ */
+
 #include "botones.h"
 
 void boton1_IRC(void) __irq {

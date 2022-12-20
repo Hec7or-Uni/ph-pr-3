@@ -1,3 +1,10 @@
+/**
+ * @file utils.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Macros y funciones útiles
+ */
+
 #ifndef __UTILS_H__
 #define __UTILS_H__
 #include <LPC210x.H>

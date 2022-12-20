@@ -1,3 +1,10 @@
+/**
+ * @file g_io.h
+ * @authors: Fernando Lahoz & Héctor Toral
+ * @date: 22/09/2022
+ * @description: Definición de funciones para el manejo de la entrada/salida
+ */
+
 #ifndef GESTOR_IO_H
 #define GESTOR_IO_H
 
@@ -37,8 +44,14 @@ void g_io_mostrar_invalido(void);
  */
 void g_io_apagar_invalido(void);
 
+/**
+ * @brief Indicar fin de partida.
+ */
 void g_io_mostrar_fin(void);
 
+/**
+ * @brief Apagar indicador fin de partida.
+ */
 void g_io_apagar_fin(void);
 
 /**
