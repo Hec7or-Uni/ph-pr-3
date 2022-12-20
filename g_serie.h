@@ -66,7 +66,7 @@ void g_serie_ejecutar_cmd(char buffer[BUFFER_SIZE]);
  * @brief
  * @param buffer
  */
-void clean_buffer(char buffer[BUFFER_SIZE]);
+void g_serie_clean_buffer(char buffer[BUFFER_SIZE]);
 
 /**
  * @brief

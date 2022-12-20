@@ -97,7 +97,7 @@ void g_serie_ejecutar_cmd(char buffer[BUFFER_SIZE]) {
   }
 }
 
-void clean_buffer(char buffer[BUFFER_SIZE]) {
+void g_serie_clean_buffer(char buffer[BUFFER_SIZE]) {
   for (uint8_t i = 0; i < BUFFER_SIZE; i++) {
     buffer[i] = '\0';
   }
@@ -110,7 +110,7 @@ void g_serie_caracter_recibido(char c) {
   if (c == '#') {  // Comienzo de comando
     leer = TRUE;
     i = 0;
-    clean_buffer(buffer);
+    g_serie_clean_buffer(buffer);
   } else if (leer && c == '!') {  // Fin de comando
     leer = FALSE;
     g_serie_ejecutar_cmd(buffer);
