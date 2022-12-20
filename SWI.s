@@ -134,7 +134,7 @@ __disable_irq_fiq
 ;/**
 ; * @brief Activa sólo las interrupciones irq en el registro de estado.
 ; */
-  __enable_irq
+__enable_irq
   LDMFD   SP!, {R8, R12}            ; Load R8, SPSR
   BIC     R12, R12, #I_Bit ; i bit = 0; f bit = 0
   MSR     SPSR_cxsf, R12            ; Set SPSR

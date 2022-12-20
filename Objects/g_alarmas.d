@@ -1,0 +1,15 @@
+.\objects\g_alarmas.o: g_alarmas.c
+.\objects\g_alarmas.o: g_alarmas.h
+.\objects\g_alarmas.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\inttypes.h
+.\objects\g_alarmas.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\g_alarmas.o: cola_msg.h
+.\objects\g_alarmas.o: eventos.h
+.\objects\g_alarmas.o: msg.h
+.\objects\g_alarmas.o: temporizador.h
+.\objects\g_alarmas.o: C:\Keil_v5\ARM\INC\Philips\LPC210x.H
+.\objects\g_alarmas.o: cola_asyn.h
+.\objects\g_alarmas.o: semaforo_interrupciones.h
+.\objects\g_alarmas.o: llamadas_sistema.h
+.\objects\g_alarmas.o: temporizador.h
+.\objects\g_alarmas.o: utils.h
+.\objects\g_alarmas.o: contadores.h

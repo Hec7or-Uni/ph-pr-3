@@ -6,7 +6,11 @@
 #include "msg.h"
 #include "temporizador.h"
 
-enum { G_ESTADISTICAS_INACTIVO, G_ESTADISTICAS_ACTIVO };
+enum {
+  G_ESTADISTICAS_INACTIVO,
+  G_ESTADISTICAS_ACTIVO,
+  G_ESTADISTICAS_ESPERANDO
+};
 
 /**
  * @brief Tratamiento de mensajes del módulo del gestor de estadísticas

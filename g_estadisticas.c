@@ -15,20 +15,38 @@ void g_estadisticas_tratar_mensaje(msg_t mensaje) {
 
   switch (mensaje.ID_msg) {
     case FIN:
-      estado = G_ESTADISTICAS_INACTIVO;
-      minutos_aux = minutos_total;
-      segundos_aux = segundos_total;
-      RTC_leer(&minutos_total, &segundos_total);
-      minutos_dif = minutos_total - minutos_aux;
-      segundos_dif = segundos_total - segundos_aux;
-      if (segundos_dif < 0) {
-        segundos_dif = segundos_total + (60 - segundos_aux);
-        minutos_dif--;
+      if (estado == G_ESTADISTICAS_ACTIVO) {
+        estado = G_ESTADISTICAS_INACTIVO;
+        minutos_aux = minutos_total;
+        segundos_aux = segundos_total;
+        RTC_leer(&minutos_total, &segundos_total);
+        minutos_dif = minutos_total - minutos_aux;
+        segundos_dif = segundos_total - segundos_aux;
+        if (segundos_dif < 0) {
+          segundos_dif = segundos_total + (60 - segundos_aux);
+          minutos_dif--;
+        }
       }
       break;
+    case CELDA_MARCADA:
+      estado = G_ESTADISTICAS_ESPERANDO;
+      break;
+    case JUGADA_REALIZADA:
+      estado = G_ESTADISTICAS_ACTIVO;
+      break;
     case CANCELAR:  // los botones y NEW comienzan el juego
+      if (estado == G_ESTADISTICAS_ESPERANDO) {
+        estado = G_ESTADISTICAS_ACTIVO;
+      } else if (estado == G_ESTADISTICAS_INACTIVO) {
+        RTC_leer(&minutos_total, &segundos_total);
+        tiempo_total = 0;
+        num_mensajes = 0;
+        RTC_init();
+        estado = G_ESTADISTICAS_ACTIVO;
+      }
+      break;
     case RESET:
-      if (estado == G_ESTADISTICAS_INACTIVO) {
+      if (estado != G_ESTADISTICAS_ESPERANDO) {
         RTC_leer(&minutos_total, &segundos_total);
         tiempo_total = 0;
         num_mensajes = 0;

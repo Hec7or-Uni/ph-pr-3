@@ -10,17 +10,6 @@ void g_io_iniciar() {
   gpio_marcar_entrada(14, 2);
 }
 
-int g_io_leer_entrada() {
-  int input = gpio_leer(3, 7);
-  int msb = MSB(input) + 1;
-
-  // Comprueba que no hay más de una columna seleccionada a la vez
-  if ((input & ((1 << (msb - 1)) - 1)) != 0) return 0;
-
-  // Para que corresponda a la visión del jugador hay que invertir la columna
-  return 8 - msb;
-}
-
 void g_io_encender_realizada() {
   gpio_escribir(16, 1, 1);
   // Al cabo de 2s apagar
@@ -33,7 +22,9 @@ void g_io_mostrar_invalido() { gpio_escribir(17, 1, 1); }
 
 void g_io_apagar_invalido() { gpio_escribir(17, 1, 0); }
 
-void g_io_fin() { gpio_escribir(18, 1, 1); }
+void g_io_mostrar_fin() { gpio_escribir(18, 1, 1); }
+
+void g_io_apagar_fin() { gpio_escribir(18, 1, 0); }
 
 void g_io_overflow() { gpio_escribir(30, 1, 1); }
 
@@ -55,9 +46,19 @@ void g_io_tratar_evento(evento_t evento) {
 }
 
 void g_io_tratar_mensaje(msg_t mensaje) {
+  static uint8_t estado = G_IO_FIN_LIBRE;
   switch (mensaje.ID_msg) {
+    case JUGADA_REALIZADA:
+      g_io_encender_realizada();
+			estado = G_IO_FIN_LIBRE;
+      break;
+    case CANCELAR:
+      estado = G_IO_FIN_LIBRE;
     case RESET:
-      g_io_iniciar();
+      g_io_apagar_fin();
+      break;
+    case CELDA_MARCADA:
+      estado = G_IO_FIN_BLOQUEADO;
       break;
     case LATIDO:
       g_io_latido();
@@ -71,14 +72,13 @@ void g_io_tratar_mensaje(msg_t mensaje) {
       else
         g_io_mostrar_invalido();
       break;
-    case JUGADA_REALIZADA:
-      g_io_encender_realizada();
-      break;
     case APAGAR_REALIZADA:
       g_io_apagar_realizada();
       break;
     case FIN:
-      g_io_fin();
+      if (estado == G_IO_FIN_LIBRE) {
+        g_io_mostrar_fin();
+      }
       break;
     case OVERFLOW_M:
       g_io_overflow();

@@ -225,14 +225,13 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
     case JUGADA_REALIZADA:
       g_serie_encolar_tablero();
       cola_encolar_msg(PEDIR_JUGADOR, 0);
+      estado = G_SERIE_ACTIVO;
       break;
     case JUGADOR:
-      if (estado == G_SERIE_ACTIVO) {
-        if (mensaje.auxData == FICHA_BLANCA)
-          g_serie_encolar_cadena(CADENA_TURNO_BLANCAS);
-        else if (mensaje.auxData == FICHA_NEGRA)
-          g_serie_encolar_cadena(CADENA_TURNO_NEGRAS);
-      }
+      if (mensaje.auxData == FICHA_BLANCA)
+        g_serie_encolar_cadena(CADENA_TURNO_BLANCAS);
+      else if (mensaje.auxData == FICHA_NEGRA)
+        g_serie_encolar_cadena(CADENA_TURNO_NEGRAS);
       break;
     case CALIDAD_SERVICIO:
       g_serie_mostrar_qos(mensaje.auxData);
@@ -252,6 +251,7 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
       if (estado == G_SERIE_INACTIVO) {
         estado = G_SERIE_ACTIVO;
         g_serie_encolar_tablero();
+        cola_encolar_msg(PEDIR_JUGADOR, 0);
       } else if (estado == G_SERIE_ESPERANDO) {
         cola_encolar_msg(SET_ALARM, g_alarma_crear(CONFIRMAR_JUGADA, FALSE, 0));
         estado = G_SERIE_ACTIVO;
@@ -261,15 +261,17 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
       }
       break;
     case RESET:
-      if (estado != G_SERIE_INACTIVO) {
-        g_serie_encolar_cadena(CADENA_RESET);
+      if (estado != G_SERIE_ESPERANDO) {
+        if (estado == G_SERIE_ACTIVO) {
+          g_serie_encolar_cadena(CADENA_RESET);
+        }
+        estado = G_SERIE_ACTIVO;
+        g_serie_encolar_tablero();
+        cola_encolar_msg(PEDIR_JUGADOR, 0);
       }
-      estado = G_SERIE_ACTIVO;
-      g_serie_encolar_tablero();
-      cola_encolar_msg(PEDIR_JUGADOR, 0);
       break;
     case FIN:
-      if (estado != G_SERIE_INACTIVO) {
+      if (estado == G_SERIE_ACTIVO) {
         estado = G_SERIE_INACTIVO;
         g_serie_encolar_cadena(CADENA_FIN);
         if (mensaje.auxData == FICHA_BLANCA) {

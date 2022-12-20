@@ -235,7 +235,7 @@ void C4_devolver_fila(CELDA tablero[TAM_FILS][TAM_COLS], uint32_t fila) {
 }
 
 void conecta4_tratar_mensaje(msg_t mensaje) {
-  static uint8_t estado = C4_JUGANDO, fila, columna, color;
+  static uint8_t estado = C4_FIN, fila, columna, color;
   static CELDA tablero[7][8] = {
       0, 0XC1, 0XC2, 0XC3, 0XC4, 0XC5, 0XC6, 0XC7, 0XF1, 0, 0,    0, 0,    0,
       0, 0,    0XF2, 0,    0,    0,    0,    0,    0,    0, 0XF3, 0, 0,    0,
@@ -244,16 +244,25 @@ void conecta4_tratar_mensaje(msg_t mensaje) {
 
   switch (mensaje.ID_msg) {
     case RESET:
-      estado = C4_JUGANDO;
-      color = FICHA_BLANCA;
-      conecta4_iniciar(tablero);
+      if (estado != C4_ESPERANDO) {
+        estado = C4_JUGANDO;
+        color = FICHA_BLANCA;
+        conecta4_iniciar(tablero);
+      }
       break;
     case FIN:
-      estado = C4_FIN;
+      if (estado == C4_JUGANDO) {
+        estado = C4_FIN;
+      }
       break;
     case CANCELAR:
+      if (estado == C4_FIN) {
+        color = FICHA_BLANCA;
+        conecta4_iniciar(tablero);
+      } else if (estado == C4_ESPERANDO) {
+        C4_vaciar_celda_tablero(tablero, fila, columna);
+      }
       estado = C4_JUGANDO;
-      C4_vaciar_celda_tablero(tablero, fila, columna);
       break;
     case JUGAR:
       if (estado == C4_JUGANDO) {
