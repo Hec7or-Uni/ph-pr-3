@@ -50,7 +50,6 @@ void init(void) {
 }
 
 int main(void) {
-
   int hay_evento, hay_msg;
   init();
   test_overflow(0);

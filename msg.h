@@ -25,6 +25,8 @@ enum Mensajes {
   CONFIRMAR_JUGADA,
   JUGADA_REALIZADA,
   APAGAR_REALIZADA,
+  IGNORE_CMD,
+  APAGAR_IGNORE_CMD,
 
   JUGAR,     // auxData := columna
   EJECUTAR,  // auxData := mensaje a encolar

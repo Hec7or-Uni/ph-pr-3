@@ -95,6 +95,7 @@ void g_serie_ejecutar_cmd(char buffer[BUFFER_SIZE]) {
       return;
     }
   }
+  cola_encolar_msg(IGNORE_CMD, 0);
 }
 
 void g_serie_clean_buffer(char buffer[BUFFER_SIZE]) {
@@ -105,20 +106,27 @@ void g_serie_clean_buffer(char buffer[BUFFER_SIZE]) {
 
 void g_serie_caracter_recibido(char c) {
   static char buffer[BUFFER_SIZE];
-  static uint8_t i = 0, leer = FALSE;
+  static uint8_t i = 0, k = 0, leer = FALSE;
 
   if (c == '#') {  // Comienzo de comando
+    cola_encolar_msg(APAGAR_IGNORE_CMD, 0);
     leer = TRUE;
     i = 0;
+    k = 0;
     g_serie_clean_buffer(buffer);
   } else if (leer && c == '!') {  // Fin de comando
     leer = FALSE;
+    k = 0;
     g_serie_ejecutar_cmd(buffer);
   } else if (leer) {  // Caracter del comando
     if (i >= 3)
       leer = FALSE;
     else
       buffer[i++] = c;
+  }
+  k++;
+  if (k > 5) {
+    cola_encolar_msg(IGNORE_CMD, 0);
   }
 }
 

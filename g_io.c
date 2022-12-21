@@ -33,6 +33,10 @@ void g_io_mostrar_fin() { gpio_escribir(18, 1, 1); }
 
 void g_io_apagar_fin() { gpio_escribir(18, 1, 0); }
 
+void g_io_mostrar_ignore_cmd() { gpio_escribir(19, 1, 1); }
+
+void g_io_apagar_ignore_cmd() { gpio_escribir(19, 1, 0); }
+
 void g_io_overflow() { gpio_escribir(30, 1, 1); }
 
 void g_io_latido() {
@@ -81,6 +85,12 @@ void g_io_tratar_mensaje(msg_t mensaje) {
       break;
     case APAGAR_REALIZADA:
       g_io_apagar_realizada();
+      break;
+    case IGNORE_CMD:
+      g_io_mostrar_ignore_cmd();
+      break;
+    case APAGAR_IGNORE_CMD:
+      g_io_apagar_ignore_cmd();
       break;
     case FIN:
       if (estado == G_IO_FIN_LIBRE) {
