@@ -43,7 +43,7 @@ enum Mensajes {
 
   CANCELAR,
   RESET,
-  FIN,  // auxData := ganador o 0 (empate)
+  FIN,  // auxData := ganador, empate o nada
   OVERFLOW_M
 };
 

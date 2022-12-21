@@ -6,4 +6,4 @@ Sesión 1
   - [x] Paso C: Utilización del `real time clock` y `watchdog`
   - [x] Paso D: Eliminación de las condiciones de carrera.
   - [x] Paso E: Introducción de jugada por línea serie.
-  - [ ] Paso F: Máquina de estados del juego completo en su implementación final
+  - [x] Paso F: Máquina de estados del juego completo en su implementación final

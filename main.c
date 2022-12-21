@@ -17,8 +17,6 @@
 #include "g_serie.h"
 #include "llamadas_sistema.h"
 
-volatile char letra;
-
 /**
  * @brief Función que prueba la respuesta del sistema ante el overflow
  * @param case 1: Test Overflow para la cola de eventos
@@ -51,30 +49,7 @@ void init(void) {
   WD_feed();
 }
 
-// static volatile uint32_t time;
-// static volatile uint32_t I;
-// static volatile uint32_t F;
-
 int main(void) {
-  // disable_irq();
-  // enable_irq();
-  // disable_irq_fiq();
-  // enable_irq_fiq();
-
-  // time = clock_gettime();
-  // I = read_IRQ_bit();
-  // F = read_FIQ_bit();
-
-  // volatile uint32_t min = 0, seg = 0;
-  // while (1) {
-  // 	uint32_t m, s;
-  //   RTC_leer(&m, &s);
-  // 	min = m;
-  // 	//seg = s;
-  //   if ((s & 1) != 0) {
-  //     seg = s;
-  //   }
-  // }
 
   int hay_evento, hay_msg;
   init();
@@ -102,7 +77,6 @@ int main(void) {
       g_estadisticas_tratar_mensaje(msg);
     }
     if (!hay_evento && !hay_msg) g_energia_idle();
-
     WD_feed();
   }
 }

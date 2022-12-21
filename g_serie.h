@@ -34,101 +34,108 @@ enum {
 };
 
 /**
- * @brief
- * @param cadena
+ * @brief Encola el identificador de una cadena para ser mostrada.
+ * @param cadena Identificador de la cadena a mostrar.
  */
 void g_serie_encolar_cadena(uint8_t cadena);
 
 /**
- * @brief
+ * @brief Desencola el identificador de una cadena para mostrar la siguiente.
  */
 void g_serie_desencolar_cadena(void);
 
 /**
- * @brief
- * @param cadena
+ * @brief Muestra la cadena correspondiente al identificador.
+ * @param cadena Identificador de la cadena a mostrar.
  */
 void g_serie_mostrar_cadena(uint8_t cadena);
 
 /**
- * @brief
- * @param buffer
+ * @brief Comprueba que el comando del buffer corresponde a #Cx! y en 
+ *        caso afirmativo lo ejecuta.
+ * @param buffer Comando a ejecutar
  */
 int g_serie_check_c(char buffer[BUFFER_SIZE]);
 
 /**
- * @brief
- * @param buffer
+ * @brief Comprueba que el comando del buffer corresponde a alguno de los
+ *        disponibles y en caso afirmativo lo ejecuta.
+ * @param buffer Comando a ejecutar
  */
 void g_serie_ejecutar_cmd(char buffer[BUFFER_SIZE]);
 
 /**
- * @brief
- * @param buffer
+ * @brief Sobreescribe todos los caracteres del buffer por '\0'.
+ * @param buffer Buffer de almacenamiento de comandos.
  */
 void g_serie_clean_buffer(char buffer[BUFFER_SIZE]);
 
 /**
- * @brief
- * @param c
+ * @brief Función llamada cuando se recibe un caracter. Lo añade
+ *        al buffer de comandos.
+ * @param c Caracter recibido.
  */
 void g_serie_caracter_recibido(char c);
 
 /**
- * @brief
- * @param celda
+ * @brief Codifica el valor de celda como un caracter.
+ * @param celda Valor de celda a codificar.
+ * @return Valor codificado como caracter.
  */
 char g_serie_codificar_jugador(CELDA celda);
 
 /**
- * @brief
- * @param datosFila
+ * @brief Muestra una fila con los datos de sus celdas.
+ * @param datosFila Datos de las celdas de una fila.
  */
 void g_serie_mostrar_fila(uint32_t datosFila);
 
 /**
- * @brief
- * @param array
- * @param i
- * @param x
+ * @brief Escribe el numero x como caracteres de texto en el array,
+ *        alineado a la derecha a partir de la posición i.
+ * @param array Cadena donde se escribe el número.
+ * @param i Posición final (posición de las unidades).
+ * @param x Número a escribir.
  */
 void g_serie_itoa(char array[], uint32_t i, uint32_t x);
 
 /**
- * @brief
- * @param latencia
+ * @brief Muestra la latencia media de transmisión de mensajes.
+ * @param latencia Tiempo medio de transmisión de mensajes (us).
  */
 void g_serie_mostrar_qos(uint32_t latencia);
 
 /**
- * @brief
- * @param minutos
+ * @brief Muestra los minutos transcurridos de la partida.
+ * @param minutos Minutos transcurridos en la partida.
  */
 void g_serie_mostrar_minutos(uint32_t minutos);
 
 /**
- * @brief
- * @param segundos
+ * @brief Muestra los segundos transcurridos de la partida.
+ * @param segundos Segundos transcurridos en la partida.
  */
 void g_serie_mostrar_segundos(uint32_t segundos);
 
 /**
- * @brief
+ * @brief Encola los identificadores de las cadenas que componen el tablero.
  */
 void g_serie_encolar_tablero(void);
 
 /**
- * @brief
+ * @brief Encola los identificadores de las cadenas que componen el
+ *        mensaje de inicio.
  */
 void g_serie_encolar_inicio(void);
 
 /**
- * @brief
+ * @brief Encola los identificadores de las cadenas que componen el
+ *        mensaje de comienzo.
  */
 void g_serie_encolar_comenzar(void);
 
 /**
- * @brief
+ * @brief Inicia el funcionamiento del gestor.
  */
 void g_serie_iniciar(void);
 

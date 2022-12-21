@@ -52,28 +52,3 @@ void temporizador_reloj(int periodo) {
   T0TC = 0;
   T0TCR = T0TCR | 0x1;  // comienza a contar
 }
-
-void test_timer1(void) {
-  volatile uint32_t time;
-  temporizador_iniciar();
-  volatile int dummy = 123;
-  dummy += 12;
-  time = dummy;
-  temporizador_empezar();
-  time = temporizador_leer();
-  while (1) {
-    while ((time + (1000000 - 1)) > temporizador_leer())
-      ;
-    time = temporizador_leer();
-  }
-}
-
-void test_timer0(void) {
-  temporizador_reloj(5000);
-
-  while (!cola_hay_eventos())
-    ;
-
-  while (1)
-    ;
-}

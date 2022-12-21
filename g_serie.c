@@ -38,7 +38,7 @@ void g_serie_desencolar_cadena(void) {
   }
   full = FALSE;
 
-  if (first != last) {  // Si está vacía una vez desencolado se muestra
+  if (first != last) {  // Si no está vacía una vez desencolado se muestra
     uint8_t cadena = cola_cadenas[first];
     g_serie_mostrar_cadena(cadena);
   }
@@ -165,7 +165,6 @@ void g_serie_itoa(char array[], uint32_t i, uint32_t x) {
 void g_serie_mostrar_qos(uint32_t latencia) {
   char array[BUFFER_ENVIO_SIZE + 1] = "Latencia:                 Xus\n\n";
   g_serie_itoa(array, 26 /*Posicion de la X*/, latencia);
-  // g_serie_itoa(array, 26 /*Posicion de la X*/, 365);
   uart0_enviar_array(array);
 }
 

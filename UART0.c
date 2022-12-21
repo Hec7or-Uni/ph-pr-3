@@ -7,7 +7,7 @@
 
 #include "UART0.h"
 
-static uint8_t indice_envio = 0, longitud;
+static volatile uint8_t indice_envio = 0, longitud;
 static char buffer_envio[BUFFER_ENVIO_SIZE];
 
 void uart0_IRC(void) __irq {
