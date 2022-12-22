@@ -18,12 +18,14 @@ static uint32_t recover;
 
 /**
  * @brief Bloquea las interrupciones
+ * @retrun Flags de recuperación
  */
-void bloquear_interrupciones(void);
+uint32_t bloquear_interrupciones(void);
 
 /**
  * @brief Libera las interrupciones bloqueadas
+ * @param flags Flags de recuperación
  */
-void liberar_interrupciones(void);
+void liberar_interrupciones(uint32_t flags);
 
 #endif

@@ -17,9 +17,9 @@ static uint32_t colaDATA[COLA_EVENTOS_SIZE];
 static uint8_t colaID[COLA_EVENTOS_SIZE];
 
 void cola_encolar_eventos(uint8_t ID_evento, uint32_t veces, uint32_t auxData) {
-  bloquear_interrupciones(); /*LOCK*/
+  uint32_t flags = bloquear_interrupciones(); /*LOCK*/
   cola_encolar_eventos_raw(ID_evento, veces, auxData);
-  liberar_interrupciones(); /*UNLOCK*/
+  liberar_interrupciones(flags); /*UNLOCK*/
 }
 
 void cola_encolar_eventos_raw(uint8_t ID_evento, uint32_t veces,
@@ -54,13 +54,13 @@ evento_t cola_desencolar_eventos(void) {
 
   // La escritura ambas variables debe ser atómica, para evitar considerar que
   // la cola no está llena en caso de que una interrupción complete la cola.
-  bloquear_interrupciones(); /*LOCK*/
+  uint32_t flags = bloquear_interrupciones(); /*LOCK*/
   first++;
   if (first == COLA_EVENTOS_SIZE) {
     first = 0;
   }
   full = FALSE;
-  liberar_interrupciones(); /*UNLOCK*/
+  liberar_interrupciones(flags); /*UNLOCK*/
 
   return evento;
 }

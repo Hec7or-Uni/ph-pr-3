@@ -14,11 +14,12 @@ void uart0_IRC(void) __irq {
   static int vecesRecibido = 0;
   static int vecesEnviado = 0;
 
-  int interrupcion = (U0IIR >> 0x1) & 0x03;
+  int iir = U0IIR;
 
-  if (interrupcion == 0x02 && (U0LSR & 0x01) != 0) {  // BRB
+  if (iir & 0x04) {  // BRB
     cola_encolar_eventos(CARACTER_RECIBIDO, ++vecesRecibido, U0RBR);
-  } else if (interrupcion == 0x01 && (U0LSR & 0x20) != 0) {  // THRE
+  }
+	if (iir & 0x2) {  // THRE
     cola_encolar_eventos(CARACTER_ENVIADO, ++vecesEnviado, 0);
   }
 

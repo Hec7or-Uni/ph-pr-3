@@ -34,8 +34,8 @@ void WD_init(int sec)  {
 }
 
 void WD_feed() {
-  disable_irq_fiq();
+  uint32_t flags = bloquear_interrupciones(); /*LOCK*/
   WDFEED = 0xAA;
   WDFEED = 0x55;
-  enable_irq_fiq();
+  liberar_interrupciones(flags); /*UNLOCK*/
 }
