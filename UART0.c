@@ -19,7 +19,7 @@ void uart0_IRC(void) __irq {
   if (iir & 0x04) {  // BRB
     cola_encolar_eventos(CARACTER_RECIBIDO, ++vecesRecibido, U0RBR);
   }
-	if (iir & 0x2) {  // THRE
+  if (iir & 0x2) {  // THRE
     cola_encolar_eventos(CARACTER_ENVIADO, ++vecesEnviado, 0);
   }
 
