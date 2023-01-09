@@ -35,7 +35,7 @@ void uart0_iniciar() {
   U0DLM = 0;
   U0DLL = 97;
   // Cálculo:
-  // Rs = PCLK / (16 * (256 * U0DLM) + U0DLL) = 15E6 / (16 * 97) = 9.664bd
+  // Rs = PCLK / (16 * (256 * U0DLM + U0DLL)) = 15E6 / (16 * 97) = 9.664bd
 
   U0LCR = 0x03;  // 8 bits, sin paridad, 1 Stop bit, DLAB = 0
 

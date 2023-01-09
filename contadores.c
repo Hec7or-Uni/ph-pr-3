@@ -29,7 +29,7 @@ void RTC_leer(uint32_t* minutos, uint32_t* segundos) {
 
 void WD_init(int sec)  {
   WDTC = sec * 3750000;  // Set tiempo de watchdog
-  // x * 15E-6 s * 4 = sec <-> x = sec / (15E-6 * 4) = sec * 3750000 s^(-1)
+  // x * (1/15E6s) * 4 = sec <-> x = sec * 15E6 (1/4) = 3750000 * sec s^(-1)
   WDMOD = WDMOD | 3;  // Reset y watchdog)
 }
 

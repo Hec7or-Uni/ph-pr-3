@@ -7,12 +7,32 @@
 
 #include "g_estadisticas.h"
 
+void g_estadisticas_fin(uint32_t *minutos_total, uint32_t *segundos_total,
+                        int8_t *minutos_dif, int8_t *segundos_dif) {
+  int8_t minutos_aux = *minutos_total;
+  int8_t segundos_aux = *segundos_total;
+  RTC_leer(minutos_total, segundos_total);
+  *minutos_dif = *minutos_total - minutos_aux;
+  *segundos_dif = *segundos_total - segundos_aux;
+  if (*segundos_dif < 0) {
+    *segundos_dif = *segundos_total + (60 - segundos_aux);
+    *minutos_dif--;
+  }
+}
+
+void g_estadisticas_cr(uint32_t *tiempo_total, uint32_t *num_mensajes,
+                       uint32_t *minutos_total, uint32_t *segundos_total) {
+  RTC_leer(minutos_total, segundos_total);
+  *tiempo_total = 0;
+  *num_mensajes = 0;
+  RTC_init();
+}
+
 void g_estadisticas_tratar_mensaje(msg_t mensaje) {
   static uint32_t tiempo_total = 0, num_mensajes = 0;
   static uint32_t minutos_total = 0, segundos_total = 0;
   static int8_t minutos_dif = 0, segundos_dif = 0;
   static uint8_t estado = G_ESTADISTICAS_INACTIVO;
-  int8_t minutos_aux, segundos_aux;
 
   int tiempo_msg = temporizador_leer() - mensaje.timestamp;
   if (tiempo_msg > 0) {
@@ -24,15 +44,8 @@ void g_estadisticas_tratar_mensaje(msg_t mensaje) {
     case FIN:
       if (estado == G_ESTADISTICAS_ACTIVO) {
         estado = G_ESTADISTICAS_INACTIVO;
-        minutos_aux = minutos_total;
-        segundos_aux = segundos_total;
-        RTC_leer(&minutos_total, &segundos_total);
-        minutos_dif = minutos_total - minutos_aux;
-        segundos_dif = segundos_total - segundos_aux;
-        if (segundos_dif < 0) {
-          segundos_dif = segundos_total + (60 - segundos_aux);
-          minutos_dif--;
-        }
+        g_estadisticas_fin(&minutos_total, &segundos_total, &minutos_dif,
+                           &segundos_dif);
       }
       break;
     case CELDA_MARCADA:
@@ -45,19 +58,15 @@ void g_estadisticas_tratar_mensaje(msg_t mensaje) {
       if (estado == G_ESTADISTICAS_ESPERANDO) {
         estado = G_ESTADISTICAS_ACTIVO;
       } else if (estado == G_ESTADISTICAS_INACTIVO) {
-        RTC_leer(&minutos_total, &segundos_total);
-        tiempo_total = 0;
-        num_mensajes = 0;
-        RTC_init();
+        g_estadisticas_cr(&tiempo_total, &num_mensajes, &minutos_total,
+                          &segundos_total);
         estado = G_ESTADISTICAS_ACTIVO;
       }
       break;
     case RESET:
       if (estado != G_ESTADISTICAS_ESPERANDO) {
-        RTC_leer(&minutos_total, &segundos_total);
-        tiempo_total = 0;
-        num_mensajes = 0;
-        RTC_init();
+        g_estadisticas_cr(&tiempo_total, &num_mensajes, &minutos_total,
+                          &segundos_total);
         estado = G_ESTADISTICAS_ACTIVO;
       }
       break;

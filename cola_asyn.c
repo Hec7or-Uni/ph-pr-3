@@ -50,11 +50,11 @@ evento_t cola_desencolar_eventos(void) {
   // valores no pueden ser sobreescritos.
   evento.veces = colaVECES[first];
   evento.auxData = colaDATA[first];
-  evento.ID_evento = colaID[first];
 
   // La escritura ambas variables debe ser atómica, para evitar considerar que
   // la cola no está llena en caso de que una interrupción complete la cola.
   uint32_t flags = bloquear_interrupciones(); /*LOCK*/
+  evento.ID_evento = colaID[first];
   first++;
   if (first == COLA_EVENTOS_SIZE) {
     first = 0;
