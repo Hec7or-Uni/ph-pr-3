@@ -7,8 +7,8 @@
 
 #include "g_estadisticas.h"
 
-void g_estadisticas_fin(uint32_t *minutos_total, uint32_t *segundos_total,
-                        int8_t *minutos_dif, int8_t *segundos_dif) {
+void g_estadisticas_partida(uint32_t *minutos_total, uint32_t *segundos_total,
+                            int8_t *minutos_dif, int8_t *segundos_dif) {
   int8_t minutos_aux = *minutos_total;
   int8_t segundos_aux = *segundos_total;
   RTC_leer(minutos_total, segundos_total);
@@ -20,8 +20,8 @@ void g_estadisticas_fin(uint32_t *minutos_total, uint32_t *segundos_total,
   }
 }
 
-void g_estadisticas_cr(uint32_t *tiempo_total, uint32_t *num_mensajes,
-                       uint32_t *minutos_total, uint32_t *segundos_total) {
+void g_estadisticas_mensaje(uint32_t *tiempo_total, uint32_t *num_mensajes,
+                            uint32_t *minutos_total, uint32_t *segundos_total) {
   RTC_leer(minutos_total, segundos_total);
   *tiempo_total = 0;
   *num_mensajes = 0;
