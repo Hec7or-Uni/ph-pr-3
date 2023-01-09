@@ -19,7 +19,7 @@ I (g_alarmas.h)(0x63BC3646)
 I (g_boton.h)(0x63BC3646)
 I (g_energia.h)(0x63BC3646)
 I (power.h)(0x63BC3646)
-I (g_estadisticas.h)(0x63BC3646)
+I (g_estadisticas.h)(0x63BC3D77)
 I (g_io.h)(0x63BC3646)
 I (gpio.h)(0x63BC3646)
 I (g_serie.h)(0x63BC3646)
@@ -173,8 +173,8 @@ I (cola_msg.h)(0x63BC3646)
 I (conecta4_2022.h)(0x63BC3646)
 I (g_alarmas.h)(0x63BC3646)
 I (contadores.h)(0x63BC3646)
-F (.\g_estadisticas.c)(0x63BC3BE1)(--c99 -c --cpu ARM7TDMI -D__EVAL -g -O3 -Otime-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Philips-D__UVISION_VERSION="526"-o .\objects\g_estadisticas.o --omf_browse .\objects\g_estadisticas.crf --depend .\objects\g_estadisticas.d)
-I (g_estadisticas.h)(0x63BC3646)
+F (.\g_estadisticas.c)(0x63BC3DC3)(--c99 -c --cpu ARM7TDMI -D__EVAL -g -O3 -Otime-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-IC:\Keil_v5\ARM\INC\Philips-D__UVISION_VERSION="526"-o .\objects\g_estadisticas.o --omf_browse .\objects\g_estadisticas.crf --depend .\objects\g_estadisticas.d)
+I (g_estadisticas.h)(0x63BC3D77)
 I (cola_msg.h)(0x63BC3646)
 I (C:\Keil_v5\ARM\ARMCC\include\inttypes.h)(0x599F2F9E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599F2F9E)
@@ -247,7 +247,7 @@ F (.\g_energia.h)(0x63BC3646)()
 F (.\g_io.h)(0x63BC3646)()
 F (.\g_boton.h)(0x63BC3646)()
 F (.\g_serie.h)(0x63BC3646)()
-F (.\g_estadisticas.h)(0x63BC3646)()
+F (.\g_estadisticas.h)(0x63BC3D77)()
 F (.\celda.h)(0x63BC3646)()
 F (.\conecta4_2022.h)(0x63BC3646)()
 F (.\semaforo_interrupciones.h)(0x63BC3646)()

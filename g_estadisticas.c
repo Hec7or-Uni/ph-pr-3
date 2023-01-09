@@ -44,8 +44,8 @@ void g_estadisticas_tratar_mensaje(msg_t mensaje) {
     case FIN:
       if (estado == G_ESTADISTICAS_ACTIVO) {
         estado = G_ESTADISTICAS_INACTIVO;
-        g_estadisticas_fin(&minutos_total, &segundos_total, &minutos_dif,
-                           &segundos_dif);
+        g_estadisticas_partida(&minutos_total, &segundos_total, &minutos_dif,
+                               &segundos_dif);
       }
       break;
     case CELDA_MARCADA:
@@ -58,15 +58,15 @@ void g_estadisticas_tratar_mensaje(msg_t mensaje) {
       if (estado == G_ESTADISTICAS_ESPERANDO) {
         estado = G_ESTADISTICAS_ACTIVO;
       } else if (estado == G_ESTADISTICAS_INACTIVO) {
-        g_estadisticas_cr(&tiempo_total, &num_mensajes, &minutos_total,
-                          &segundos_total);
+        g_estadisticas_mensaje(&tiempo_total, &num_mensajes, &minutos_total,
+                               &segundos_total);
         estado = G_ESTADISTICAS_ACTIVO;
       }
       break;
     case RESET:
       if (estado != G_ESTADISTICAS_ESPERANDO) {
-        g_estadisticas_cr(&tiempo_total, &num_mensajes, &minutos_total,
-                          &segundos_total);
+        g_estadisticas_mensaje(&tiempo_total, &num_mensajes, &minutos_total,
+                               &segundos_total);
         estado = G_ESTADISTICAS_ACTIVO;
       }
       break;
