@@ -1,6 +1,0 @@
---c99 -c --cpu ARM7TDMI -D__EVAL -g -O0 -Otime
--IC:\Keil_v5\ARM\RV31\INC
--IC:\Keil_v5\ARM\CMSIS\Include
--IC:\Keil_v5\ARM\INC\Philips
--D__UVISION_VERSION="526"
--o .\objects\cadenas.o --omf_browse .\objects\cadenas.crf --depend .\objects\cadenas.d "cadenas.c"
