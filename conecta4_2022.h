@@ -26,7 +26,7 @@ enum {
   TAM_COLS = PADDING_COL + NUM_COLUMNAS
 };
 
-enum C4_estado { C4_JUGANDO, C4_ESPERANDO, C4_FIN };
+enum C4_estado { C4_ACTIVO, C4_ESPERANDO, C4_INACTIVO };
 
 /* declaracion de funciones visibles en el exterior conecta4*/
 
