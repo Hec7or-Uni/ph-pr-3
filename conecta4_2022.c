@@ -8,14 +8,13 @@
 
 #include "conecta4_2022.h"
 
-// devuelve ERROR en caso de no encontrar fila
 uint8_t C4_calcular_fila(CELDA cuadricula[TAM_FILS][TAM_COLS],
                          uint8_t columna) {
-  uint8_t fila = 1;  // row 0 is used to enumerate the columns
+  uint8_t fila = 1;
 
   if ((columna < 1) || (columna > NUM_COLUMNAS)) {
     return ERROR;
-  }  // Out of the board. Columna must go form 1 to 7
+  }  
 
   while ((fila <= NUM_FILAS) &&
          (celda_vacia(cuadricula[fila][columna]) == FALSE)) {
@@ -24,11 +23,10 @@ uint8_t C4_calcular_fila(CELDA cuadricula[TAM_FILS][TAM_COLS],
   return fila <= NUM_FILAS ? fila : ERROR;
 };
 
-// devuelve la longitud de la línea más larga
 __attribute__((noinline)) uint8_t conecta4_buscar_alineamiento_c(
     CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t fila, uint8_t columna,
     uint8_t color, int8_t delta_fila, int8_t delta_columna) {
-  // avanzar hasta que cela esté vacía, sea distinto color o lleguemos al borde
+  // avanzar hasta que celda esté vacía, sea distinto color o lleguemos al borde
   if (!C4_fila_valida(fila) || !C4_columna_valida(columna)) {
     return 0;
   }
@@ -49,7 +47,6 @@ __attribute__((noinline)) uint8_t conecta4_buscar_alineamiento_c(
                                             delta_columna);
 }
 
-// devuelve true si encuentra una línea de longitud mayor o igual a 4
 __attribute__((noinline)) uint8_t conecta4_hay_linea_c_c(
     CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t fila, uint8_t columna,
     uint8_t color) {
@@ -128,7 +125,6 @@ uint8_t conecta4_hay_linea_arm_arm_c(CELDA cuadricula[TAM_FILS][TAM_COLS],
   return FALSE;
 }
 
-// devuelve true si encuentra una línea de longitud mayor o igual a 4
 __attribute__((noinline)) uint8_t conecta4_hay_linea_c_arm(
     CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t fila, uint8_t columna,
     uint8_t color) {
@@ -212,6 +208,7 @@ void C4_jugar(CELDA tablero[TAM_FILS][TAM_COLS], uint8_t *estado, uint8_t *fila,
     *estado = C4_ESPERANDO;
     C4_actualizar_tablero(tablero, *fila, *columna, FICHA_FIJADA);
     cola_encolar_msg(CELDA_MARCADA, 0);
+    cola_encolar_msg(SET_ALARM, g_alarma_crear(CONFIRMAR_JUGADA, FALSE, 1000));
   }
 }
 
@@ -245,10 +242,14 @@ void C4_devolver_fila(CELDA tablero[TAM_FILS][TAM_COLS], uint32_t fila) {
 void conecta4_tratar_mensaje(msg_t mensaje) {
   static uint8_t estado = C4_INACTIVO, fila, columna, color;
   static CELDA tablero[7][8] = {
-      0, 0XC1, 0XC2, 0XC3, 0XC4, 0XC5, 0XC6, 0XC7, 0XF1, 0, 0,    0, 0,    0,
-      0, 0,    0XF2, 0,    0,    0,    0,    0,    0,    0, 0XF3, 0, 0,    0,
-      0, 0,    0,    0,    0XF4, 0,    0,    0,    0,    0, 0,    0, 0XF5, 0,
-      0, 0,    0,    0,    0,    0,    0XF6, 0,    0,    0, 0,    0, 0,    0};
+      0,   0XC1, 0XC2, 0XC3, 0XC4, 0XC5, 0XC6, 0XC7,
+      0XF1,   0,    0,    0,    0,    0,    0,    0,
+      0XF2,   0,    0,    0,    0,    0,    0,    0,
+      0XF3,   0,    0,    0,    0,    0,    0,    0,
+      0XF4,   0,    0,    0,    0,    0,    0,    0,
+      0XF5,   0,    0,    0,    0,    0,    0,    0,
+      0XF6,   0,    0,    0,    0,    0,    0,    0
+  };
 
   switch (mensaje.ID_msg) {
     case RESET:
@@ -269,6 +270,7 @@ void conecta4_tratar_mensaje(msg_t mensaje) {
         conecta4_iniciar(tablero);
       } else if (estado == C4_ESPERANDO) {
         C4_vaciar_celda_tablero(tablero, fila, columna);
+        cola_encolar_msg(SET_ALARM, g_alarma_crear(CONFIRMAR_JUGADA, FALSE, 0));
       }
       estado = C4_ACTIVO;
       break;

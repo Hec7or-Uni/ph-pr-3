@@ -28,10 +28,8 @@ enum {
 
 enum C4_estado { C4_ACTIVO, C4_ESPERANDO, C4_INACTIVO };
 
-/* declaracion de funciones visibles en el exterior conecta4*/
-
 /**
- * @brief devuelve la longitud de la línea más larga
+ * @brief Devuelve la longitud de la línea más larga
  */
 uint8_t conecta4_buscar_alineamiento_c(CELDA cuadricula[TAM_FILS][TAM_COLS],
                                        uint8_t fila, uint8_t columna,
@@ -39,7 +37,7 @@ uint8_t conecta4_buscar_alineamiento_c(CELDA cuadricula[TAM_FILS][TAM_COLS],
                                        int8_t delta_columna);
 
 /**
- * @brief devuelve la longitud de la línea más larga
+ * @brief Devuelve la longitud de la línea más larga
  */
 uint8_t conecta4_buscar_alineamiento_arm(CELDA cuadricula[TAM_FILS][TAM_COLS],
                                          uint8_t fila, uint8_t columna,
@@ -47,13 +45,13 @@ uint8_t conecta4_buscar_alineamiento_arm(CELDA cuadricula[TAM_FILS][TAM_COLS],
                                          int8_t delta_columna);
 
 /**
- * @brief devuelve true si encuentra una línea de longitud mayor o igual a 4
+ * @brief Devuelve true si encuentra una línea de longitud mayor o igual a 4
  */
 uint8_t conecta4_hay_linea_c_c(CELDA cuadricula[TAM_FILS][TAM_COLS],
                                uint8_t fila, uint8_t columna, uint8_t color);
 
 /**
- * @brief devuelve true si encuentra una línea de longitud mayor o igual a 4
+ * @brief Devuelve true si encuentra una línea de longitud mayor o igual a 4
  */
 uint8_t conecta4_hay_linea_arm_c(CELDA cuadricula[TAM_FILS][TAM_COLS],
                                  uint8_t fila, uint8_t columna, uint8_t color);
@@ -65,10 +63,12 @@ uint8_t conecta4_hay_linea_arm_arm(CELDA cuadricula[TAM_FILS][TAM_COLS],
                                    uint8_t fila, uint8_t columna,
                                    uint8_t color);
 
-// Tratamiento de mensajes del módulo de conecta 4.
+/**
+ * @brief Tratamiento de mensajes del módulo de conecta 4.
+ */
 void conecta4_tratar_mensaje(msg_t mensaje);
 
-/* declaración funciones internas */
+//---------------------------------//
 
 uint8_t C4_calcular_fila(CELDA cuadricula[TAM_FILS][TAM_COLS], uint8_t columna);
 

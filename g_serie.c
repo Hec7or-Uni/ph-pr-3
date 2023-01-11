@@ -236,8 +236,6 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
       break;
     case CELDA_MARCADA:
       estado = G_SERIE_ESPERANDO;
-      cola_encolar_msg(SET_ALARM,
-                       g_alarma_crear(CONFIRMAR_JUGADA, FALSE, 1000));
       g_serie_encolar_tablero();
       g_serie_encolar_cadena(CADENA_CANCELAR1);
       g_serie_encolar_cadena(CADENA_CANCELAR2);
@@ -275,7 +273,6 @@ void g_serie_tratar_mensaje(msg_t mensaje) {
         g_serie_encolar_tablero();
         cola_encolar_msg(PEDIR_JUGADOR, 0);
       } else if (estado == G_SERIE_ESPERANDO) {
-        cola_encolar_msg(SET_ALARM, g_alarma_crear(CONFIRMAR_JUGADA, FALSE, 0));
         estado = G_SERIE_ACTIVO;
         g_serie_encolar_cadena(CADENA_CANCELADO);
         g_serie_encolar_tablero();
