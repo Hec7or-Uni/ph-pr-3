@@ -13,6 +13,7 @@
 
 #include "celda.h"
 #include "cola_msg.h"
+#include "g_alarmas.h"
 #include "msg.h"
 #include "utils.h"
 
